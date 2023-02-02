@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <label for="id">ID:</label>
+    <input type="text" id="id" />
+    <button type="submit" onclick="getCustomer(event)">Submit</button>
+</form>
+<div id="customer-result"></div>
+<script>
+    function getCustomer(event) {
+        event.preventDefault();
+        var id = document.getElementById("id").value;
+        $.ajax({
+            url: '/customer/getbyid',
+            type: 'GET',
+            data: { id: id },
+            success: function(response) {
+                var table = "<table border='1'>"
+                table += "<tr><th>Imię</th><th>Nazwisko</th><th>E-mail</th><th>Numer telefonu</th>" +
+                    "<th>Adres</th><th>Użytkownik</th></tr>"
+                table += "<tr><td>"+response.name+"</td>"
+                table += "<td>"+response.surname+"</td>"
+                table += "<td>"+response.email+"</td>"
+                table += "<td>"+response.phone+"</td>"
+                table += "<td>"+response.address+"</td>"
+                table += "<td>"+response.user+"</td>"
+                table += "</table>"
+                document.getElementById("customer-result").innerHTML = table;
+            }
+        });
+    }
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form>
+  <label for="id">ID:</label>
+  <input type="text" id="id" />
+  <button type="submit" onclick="getDocument(event)">Submit</button>
+</form>
+<div id="document-result"></div>
+<script>
+  function getDocument(event) {
+    event.preventDefault();
+    var id = document.getElementById("id").value;
+    $.ajax({
+      url: '/document/getbyid',
+      type: 'GET',
+      data: { id: id },
+      success: function(response) {
+        var table = "<table border='1'>"
+        table += "<tr><th>Nazwa</th><th>Data</th><th>Cena</th><th>Zakup?</th></tr>"
+        table += "<tr><td>"+response.name+"</td>"
+        table += "<td>"+response.date+"</td>"
+        table += "<td>"+response.price+"</td>"
+        table += "<td>"+response.is_purchase+"</td>"
+        table += "</table>"
+        document.getElementById("document-result").innerHTML = table;
+      }
+    });
+  }
+</script>
+
+
+
+</body>
+</html>

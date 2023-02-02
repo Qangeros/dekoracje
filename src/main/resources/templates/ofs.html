@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <label for="id">ID:</label>
+    <input type="text" id="id" />
+    <button type="submit" onclick="getOfs(event)">Submit</button>
+</form>
+<div id="ofs-result"></div>
+<script>
+    function getOfs(event) {
+        event.preventDefault();
+        var id = document.getElementById("id").value;
+        $.ajax({
+            url: '/ofs/getbyid',
+            type: 'GET',
+            data: { id: id },
+            success: function(response) {
+                var table = "<table border='1'>"
+                table += "<tr><th>Numer zamówienia</th><th>Dostawca</th><th>Dokument</th><th>Cena</th>" +
+                    "<th>Czas dodania</th><th>Dostarczone?</th></tr>"
+                table += "<tr><td>"+response.order_number+"</td>"
+                table += "<td>"+response.supplier+"</td>"
+                table += "<td>"+response.document+"</td>"
+                table += "<td>"+response.price+"</td>"
+                table += "<td>"+response.timestamp+"</td>"
+                table += "<td>"+response.is_delivered+"</td>"
+                table += "</table>"
+                document.getElementById("ofs-result").innerHTML = table;
+            }
+        });
+    }
+</script>
+
+
+
+</body>
+</html>

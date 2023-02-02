@@ -1,29 +1,49 @@
 package com.example.dekoracje.controller;
 
-import com.example.dekoracje.model.Customer;
+import com.example.dekoracje.model.dto.CustomerDto;
+import com.example.dekoracje.model.entity.Address;
+import com.example.dekoracje.model.entity.Customer;
 import com.example.dekoracje.repository.CustomerRepository;
+import com.example.dekoracje.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1/customer")
+@Controller
+@RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerService customerService;
 
-    public CustomerController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    @GetMapping("")
+    public String showCustomerPage() {
+        return "customer";
     }
 
-    @GetMapping("/customers")
-    public List<Customer> getCustomers() {
-        return customerRepository.findAll();
+    @GetMapping("getbyid")
+    @ResponseBody
+    public CustomerDto getCustomer(@RequestParam(value="id", required = true) Long id) {
+        Customer customer = customerService.getCustomerById(id);
+        return new CustomerDto(customer);
     }
 
-    @GetMapping("{id}")
-    public Customer getCustomer(@PathVariable Long id) {
-        return customerRepository.findById(id).orElseThrow();
+    @GetMapping("/getallcustomers")
+    @ResponseBody
+    public List<CustomerDto> getAllCustomers() {
+        List<Customer> customers = customerService.getAllCustomerList();
+        return customers.stream()
+                .map(CustomerDto::new)
+                .toList();
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteCustomer(@PathVariable Long id) {
+        customerRepository.deleteById(id);
     }
 
     record NewCustomerRequest(String name, String surname, String email, String phone, String address) { }
@@ -31,17 +51,14 @@ public class CustomerController {
     @PostMapping
     public Customer addCustomer(@RequestBody NewCustomerRequest request) {
         Customer customer = new Customer();
+        Address address = new Address();
+
         customer.setName(request.name);
         customer.setSurname(request.surname);
         customer.setEmail(request.email);
         customer.setPhone(request.phone);
-        customer.setAddress(request.address);
+//        customer.setAddress(request.address);
         return customerRepository.save(customer);
-    }
-
-    @DeleteMapping("{id}")
-    public void deleteCustomer(@PathVariable Long id) {
-        customerRepository.deleteById(id);
     }
 
 }
