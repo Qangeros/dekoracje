@@ -4,7 +4,6 @@ import com.example.dekoracje.controller.util.ErrorResponse;
 import com.example.dekoracje.model.dto.AddressDto;
 import com.example.dekoracje.model.entity.Address;
 import com.example.dekoracje.service.AddressService;
-import com.example.dekoracje.service.DataValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,6 @@ public class AddressController{
 
     @Autowired
     private AddressService addressService;
-    @Autowired
-    private DataValidatorService dataValidatorService;
 
     @GetMapping("")
     public String showAddressPage() {

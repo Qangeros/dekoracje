@@ -13,6 +13,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private DataValidatorService dataValidatorService;
+
     @Override
     public List<Customer> getAllCustomerList() {
         return customerRepository.findAll();
@@ -21,6 +24,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer getCustomerById(Long id) {
         return customerRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Customer> getCustomerBySearch(String searchString) {
+        return customerRepository.findCustomerBySearch(searchString).orElseThrow();
     }
 
     @Override

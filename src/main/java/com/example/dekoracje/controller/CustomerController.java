@@ -25,7 +25,7 @@ public class CustomerController {
         return "customer";
     }
 
-    @GetMapping("getbyid")
+    @GetMapping("/getbyid")
     @ResponseBody
     public CustomerDto getCustomer(@RequestParam(value="id", required = true) Long id) {
         Customer customer = customerService.getCustomerById(id);
