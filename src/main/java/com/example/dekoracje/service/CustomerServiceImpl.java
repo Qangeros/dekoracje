@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer saveCustomer(Customer customer) {
         return customerRepository.save(customer);
-    }
+    } // TODO: walidacja maila, telefonu, nipu
 
     @Override
     public void deleteCustomerById(Long id) {

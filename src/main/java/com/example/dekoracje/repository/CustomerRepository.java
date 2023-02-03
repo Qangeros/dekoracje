@@ -11,7 +11,10 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query("SELECT c FROM Customer c WHERE c.name LIKE '%' ||" +
-            " :searchString || '%' ")
+    @Query("SELECT c FROM Customer c WHERE " +
+            "   c.name LIKE '%' ||" + " :searchString || '%' " +
+            "OR c.surname LIKE '%' || :searchString || '%' " +
+            "OR c.phone LIKE '%' || :searchString || '%' " +
+            "OR c.email LIKE '%' || :searchString || '%' ")
     Optional<List<Customer>> findCustomerBySearch(String searchString);
 }

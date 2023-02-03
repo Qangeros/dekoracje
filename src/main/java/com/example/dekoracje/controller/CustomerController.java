@@ -1,11 +1,13 @@
 package com.example.dekoracje.controller;
 
+import com.example.dekoracje.controller.util.ErrorResponse;
 import com.example.dekoracje.model.dto.CustomerDto;
-import com.example.dekoracje.model.entity.Address;
 import com.example.dekoracje.model.entity.Customer;
-import com.example.dekoracje.repository.CustomerRepository;
 import com.example.dekoracje.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,6 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    @Autowired
-    private CustomerRepository customerRepository;
     @Autowired
     private CustomerService customerService;
 
@@ -32,7 +32,16 @@ public class CustomerController {
         return new CustomerDto(customer);
     }
 
-    @GetMapping("/getallcustomers")
+    @GetMapping("/getbystring")
+    @ResponseBody
+    public List<CustomerDto> getCustomer(@RequestParam(value="searchString", required = true) String searchString) {
+        List<Customer> customers = customerService.getCustomerBySearch(searchString);
+        return customers.stream()
+                .map(CustomerDto::new)
+                .toList();
+    }
+
+    @GetMapping("/getall")
     @ResponseBody
     public List<CustomerDto> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomerList();
@@ -41,24 +50,24 @@ public class CustomerController {
                 .toList();
     }
 
-    @DeleteMapping("{id}")
-    public void deleteCustomer(@PathVariable Long id) {
-        customerRepository.deleteById(id);
+    @PostMapping("/add")
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+        Customer savedCustomer = customerService.saveCustomer(customer);
+        return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
     }
 
-    record NewCustomerRequest(String name, String surname, String email, String phone, String address) { }
-
-    @PostMapping
-    public Customer addCustomer(@RequestBody NewCustomerRequest request) {
-        Customer customer = new Customer();
-        Address address = new Address();
-
-        customer.setName(request.name);
-        customer.setSurname(request.surname);
-        customer.setEmail(request.email);
-        customer.setPhone(request.phone);
-//        customer.setAddress(request.address);
-        return customerRepository.save(customer);
+    @DeleteMapping("/deletebyid")
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> deleteCustomer(@RequestParam(value="id", required = true) Long id) {
+        try {
+            customerService.deleteCustomerById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataIntegrityViolationException e) {
+            ErrorResponse error = new ErrorResponse("Nie można usunąć klienta," +
+                    " ponieważ jest on powiązany z innymi rekordami w bazie danych.");
+            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+        }
     }
+
 
 }

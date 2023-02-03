@@ -19,7 +19,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_product_supplier"))
-    private Supplier id_supplier;
+    private Supplier supplier;
 
     @Column(nullable = false)
     private String name;
@@ -29,5 +29,5 @@ public class Product {
 
     @OneToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_product_type"))
-    private Type id_type;
+    private Type type;
 }

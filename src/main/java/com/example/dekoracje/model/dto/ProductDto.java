@@ -12,14 +12,13 @@ import java.io.Serializable;
 @Data
 public class ProductDto implements Serializable {
     private final Long id;
-    private final SupplierDto id_supplier;
+    private final Long supplierId;
     private final String name;
     private final Double price;
 
-
     public ProductDto(Product product) {
         this.id = product.getId();
-        this.id_supplier = new SupplierDto(product.getId_supplier());
+        this.supplierId = product.getSupplier().getId();
         this.name = product.getName();
         this.price = product.getPrice();
     }

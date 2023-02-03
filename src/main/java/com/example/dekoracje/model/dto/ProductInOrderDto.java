@@ -13,16 +13,16 @@ import java.io.Serializable;
 @Data
 public class ProductInOrderDto implements Serializable {
     private final Long id;
-    private final ProductDto id_product;
+    private final Long productId;
     private final Integer amount;
     private final Double price;
-    private final OrdersFromSupplierDto id_order_fs;
+    private final Long ordersFromSupplierId;
 
     public ProductInOrderDto(ProductInOrder productInOrder) {
         this.id = productInOrder.getId();
-        this.id_product = new ProductDto(productInOrder.getId_product());
+        this.productId = productInOrder.getProduct().getId();
         this.amount = productInOrder.getAmount();
         this.price = productInOrder.getPrice();
-        this.id_order_fs = new OrdersFromSupplierDto(productInOrder.getId_order_fs());
+        this.ordersFromSupplierId = productInOrder.getOrdersFromSupplier().getId();
     }
 }

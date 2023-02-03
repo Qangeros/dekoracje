@@ -12,15 +12,15 @@ import java.security.Timestamp;
 @Data
 public class FinancesDto implements Serializable {
     private final Long id;
-    private final Double gross_value;
-    private final Double net_value;
+    private final Double grossValue;
+    private final Double netValue;
     private final Timestamp timestamp;
 
 
     public FinancesDto(Finances finances) {
         this.id = finances.getId();
-        this.gross_value = finances.getGross_value();
-        this.net_value = finances.getNet_value();
+        this.grossValue = finances.getGrossValue();
+        this.netValue = finances.getNetValue();
         this.timestamp = finances.getTimestamp();
     }
 }

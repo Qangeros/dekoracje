@@ -12,19 +12,19 @@ import java.io.Serializable;
 public class SupplierDto implements Serializable {
     private final Long id;
     private final String name;
-    private final AddressDto address;
+    private final Long addressId;
     private final String email;
     private final String phone;
     private final String nip;
-    private final UserTableDto user;
+    private final Long userId;
 
     public SupplierDto(Supplier supplier) {
         this.id = supplier.getId();
         this.name = supplier.getName();
-        this.address = new AddressDto(supplier.getAddress());
+        this.addressId = supplier.getAddress().getId();
         this.email = supplier.getEmail();
         this.phone = supplier.getPhone();
         this.nip = supplier.getNip();
-        this.user = new UserTableDto(supplier.getUser());
+        this.userId = supplier.getUser().getId();
     }
 }

@@ -15,13 +15,13 @@ public class DocumentDto implements Serializable {
     private final String name;
     private final Timestamp date;
     private final Double price;
-    private final Boolean is_purchase;
+    private final Boolean isPurchase;
 
     public DocumentDto(Document document) {
         this.id = document.getId();
         this.name = document.getName();
         this.date = document.getDate();
         this.price = document.getPrice();
-        this.is_purchase = document.getIs_purchase();
+        this.isPurchase = document.getIsPurchase();
     }
 }

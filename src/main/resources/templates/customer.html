@@ -5,42 +5,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
           crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<form>
-    <label for="id">ID:</label>
-    <input type="text" id="id" />
-    <button type="submit" onclick="getCustomer(event)">Submit</button>
-</form>
-<div id="customer-result"></div>
-<script>
-    function getCustomer(event) {
-        event.preventDefault();
-        var id = document.getElementById("id").value;
-        $.ajax({
-            url: '/customer/getbyid',
-            type: 'GET',
-            data: { id: id },
-            success: function(response) {
-                var table = "<table border='1'>"
-                table += "<tr><th>Imię</th><th>Nazwisko</th><th>E-mail</th><th>Numer telefonu</th>" +
-                    "<th>Adres</th><th>Użytkownik</th></tr>"
-                table += "<tr><td>"+response.name+"</td>"
-                table += "<td>"+response.surname+"</td>"
-                table += "<td>"+response.email+"</td>"
-                table += "<td>"+response.phone+"</td>"
-                table += "<td>"+response.address+"</td>"
-                table += "<td>"+response.user+"</td>"
-                table += "</table>"
-                document.getElementById("customer-result").innerHTML = table;
-            }
-        });
-    }
-</script>
+<body onload="showAllCustomers(event);">
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <button type="button" class="btn btn-info mr-3" id="showAllCustomerButton"
+                            onclick="showAllCustomers(event)" >Wyświetl wszystkie</button>
+                    <div class="d-inline-block mr-3" style="width: calc(100% - 300px);">
+                        <input type="text" class="form-control" id="id" placeholder="Wyszukaj..." />
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="getCustomerButton">Wyszukaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered mx-auto">
+                <thead>
+                <tr>
+                    <th scope="col">Imię</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Adres e-mail</th>
+                    <th scope="col">Numer telefonu</th>
+                    <th scope="col">Adres</th>
+                </tr>
+                </thead>
+                <tbody id="customers">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="customer-result" class="alert alert-primary text-center"
+     role="alert" style="display:none; width:80%; margin: 0 auto;"></div>
 
 
-
+<script type="text/javascript" src="customerScripts.js"></script>
 </body>
 </html>

@@ -15,8 +15,8 @@ public class CustomerDto implements Serializable {
     private final String surname;
     private final String email;
     private final String phone;
-    private final AddressDto address;
-    private final UserTableDto user;
+    private final Long addressId;
+    private final Long userId;
 
     public CustomerDto(Customer customer) {
         this.id = customer.getId();
@@ -24,7 +24,7 @@ public class CustomerDto implements Serializable {
         this.surname = customer.getSurname();
         this.email = customer.getEmail();
         this.phone = customer.getPhone();
-        this.address = new AddressDto(customer.getAddress());
-        this.user = new UserTableDto(customer.getUser());
+        this.addressId = customer.getAddress().getId();
+        this.userId = customer.getUser().getId();
     }
 }

@@ -20,13 +20,11 @@ public class Finances {
     private Long id;
 
     @Column(nullable = false)
-    Double gross_value;
+    Double grossValue;
 
     @Column(nullable = false)
-    Double net_value;
+    Double netValue;
 
     @Column(nullable = false)
     Timestamp timestamp;
-
-
 }

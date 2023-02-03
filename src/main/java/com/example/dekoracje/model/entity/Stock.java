@@ -19,7 +19,7 @@ public class Stock {
 
     @OneToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name="fk_stock_product"))
-    private Product id_product;
+    private Product product;
 
     @Column(nullable = false)
     private Integer amount;

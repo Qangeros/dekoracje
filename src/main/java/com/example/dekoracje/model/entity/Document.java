@@ -25,11 +25,9 @@ public class Document {
     @Column(nullable = false)
     private Double price;
     @Column(nullable = false)
-    private Boolean is_purchase;
-
+    private Boolean isPurchase;
     @OneToOne
     @JoinColumn(name = "finances_id", foreignKey = @ForeignKey(name = "fk_document_finances"))
     private Finances finances;
-
 
 }

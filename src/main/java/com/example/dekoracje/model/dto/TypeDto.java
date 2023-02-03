@@ -12,11 +12,11 @@ import java.io.Serializable;
 public class TypeDto implements Serializable {
     private final Long id;
     private final String name;
-    private final Boolean is_product;
+    private final Boolean isProduct;
 
     public TypeDto(Type type) {
         this.id = type.getId();
         this.name = type.getName();
-        this.is_product = type.getIs_product();
+        this.isProduct = type.getIsProduct();
     }
 }

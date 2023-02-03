@@ -21,5 +21,5 @@ public class Type {
     private String name;
 
     @Column(nullable = false)
-    private Boolean is_product;
+    private Boolean isProduct;
 }

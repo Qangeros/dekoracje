@@ -14,12 +14,12 @@ public class UserTableDto implements Serializable {
     private final Long id;
     private final String username;
     private final String email;
-    private final UserTypeDto userType;
+    private final Long userTypeId;
 
     public UserTableDto(UserTable userTable) {
         this.id = userTable.getId();
         this.username = userTable.getUsername();
         this.email = userTable.getEmail();
-        this.userType = new UserTypeDto(userTable.getUserType());
+        this.userTypeId = userTable.getUserType().getId();
     }
 }

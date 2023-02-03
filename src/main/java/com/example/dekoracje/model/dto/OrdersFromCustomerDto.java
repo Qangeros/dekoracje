@@ -12,18 +12,18 @@ import java.security.Timestamp;
 @Data
 public class OrdersFromCustomerDto implements Serializable {
     private final Long id;
-    private final CustomerDto customer;
-    private final AddressDto address;
-    private final DocumentDto document;
+    private final Long customerId;
+    private final Long addressId;
+    private final Long documentId;
     private final Timestamp timestamp;
     private final Double price;
     private final Boolean completed;
 
     public OrdersFromCustomerDto(OrdersFromCustomer ordersFromCustomer) {
         this.id = ordersFromCustomer.getId();
-        this.customer = new CustomerDto(ordersFromCustomer.getCustomer());
-        this.address = new AddressDto(ordersFromCustomer.getAddress());
-        this.document = new DocumentDto(ordersFromCustomer.getDocument());
+        this.customerId = ordersFromCustomer.getCustomer().getId();
+        this.addressId = ordersFromCustomer.getAddress().getId();
+        this.documentId = ordersFromCustomer.getDocument().getId();
         this.timestamp = ordersFromCustomer.getTimestamp();
         this.price = ordersFromCustomer.getPrice();
         this.completed = ordersFromCustomer.getCompleted();

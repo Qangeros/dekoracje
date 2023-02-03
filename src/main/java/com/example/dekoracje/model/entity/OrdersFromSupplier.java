@@ -21,7 +21,7 @@ public class OrdersFromSupplier {
     private Long id;
 
     @Column(name = "order_number", nullable = false)
-    private String order_number;
+    private String orderNumber;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(name = "fk_ofs_supplier"))
@@ -29,7 +29,7 @@ public class OrdersFromSupplier {
 
     @OneToOne
     @JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "fk_ofs_document"))
-    private Document document;
+    private Document document; // możliwe że do wywalenia
 
     @Column(name = "price", nullable = false)
     private Double price;
@@ -38,6 +38,5 @@ public class OrdersFromSupplier {
     private Timestamp timestamp;
 
     @Column(name = "is_delivered", nullable = false)
-    private Boolean is_delivered;
-
+    private Boolean isDelivered;
 }

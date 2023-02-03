@@ -19,7 +19,7 @@ public class ProductInOrder {
 
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_pio_product"))
-    private Product id_product;
+    private Product product;
 
     @Column(nullable = false)
     private Integer amount;
@@ -29,5 +29,5 @@ public class ProductInOrder {
 
     @OneToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name="fk_pio_ofs"))
-    private OrdersFromSupplier id_order_fs;
+    private OrdersFromSupplier ordersFromSupplier;
 }
