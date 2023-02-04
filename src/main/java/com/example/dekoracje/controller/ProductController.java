@@ -37,7 +37,7 @@ public class ProductController {
     public List<ProductDto> getProduct(@RequestParam(value="searchString", required = true) String searchString) {
         List<Product> products = productService.getProductBySearch(searchString);
         return products.stream()
-                .map(ProductDto::new)
+                .map(p -> new ProductDto(p.getName(), p.getType().getName(), p.getPrice(), p.getSupplier().getName()))
                 .toList();
     }
 
@@ -46,7 +46,7 @@ public class ProductController {
     public List<ProductDto> getAllProducts() {
         List<Product> products = productService.getAllProductList();
         return products.stream()
-                .map(ProductDto::new)
+                .map(p -> new ProductDto(p.getName(), p.getType().getName(), p.getPrice(), p.getSupplier().getName()))
                 .toList();
     }
 

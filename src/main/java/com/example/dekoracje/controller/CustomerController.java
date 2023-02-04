@@ -37,7 +37,10 @@ public class CustomerController {
     public List<CustomerDto> getCustomer(@RequestParam(value="searchString", required = true) String searchString) {
         List<Customer> customers = customerService.getCustomerBySearch(searchString);
         return customers.stream()
-                .map(CustomerDto::new)
+                .map(c -> new CustomerDto(c.getName(), c.getSurname(), c.getPhone(), c.getEmail(),
+                        c.getAddress().getStreet() + ", "
+                                + c.getAddress().getCity() + ", "
+                                + c.getAddress().getPostalCode()))
                 .toList();
     }
 
@@ -45,8 +48,12 @@ public class CustomerController {
     @ResponseBody
     public List<CustomerDto> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomerList();
+
         return customers.stream()
-                .map(CustomerDto::new)
+                .map(c -> new CustomerDto(c.getName(), c.getSurname(), c.getPhone(), c.getEmail(),
+                        c.getAddress().getStreet() + ", "
+                                + c.getAddress().getCity() + ", "
+                                + c.getAddress().getPostalCode()))
                 .toList();
     }
 

@@ -9,6 +9,7 @@ public interface InitService {
     void initSupplier();
     void initProduct();
     void initStock();
+    void initCustomer();
 
 }
 

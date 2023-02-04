@@ -41,6 +41,7 @@ public class InitServiceImpl implements InitService {
         initSupplier();
         initProduct();
         initStock();
+        initCustomer();
     }
 
     @Override
@@ -120,7 +121,7 @@ public class InitServiceImpl implements InitService {
         Optional<Address> a1 = ar.findById(1L);
 
         suppliers.add(new Supplier(0L, "Sklep z rzeczami", a1.get(), "sklepik@wp.pl",
-                "123456789", "123456789", ut1.get()));
+                "123456789", "222222", ut1.get()));
         sr.saveAll(suppliers);
     }
 
@@ -163,6 +164,22 @@ public class InitServiceImpl implements InitService {
         stocks.add(new Stock(0L, p4.get(), 2));
 
         str.saveAll(stocks);
+    }
+
+    @Override
+    public void initCustomer(){
+        System.out.println("initCustomer");
+        System.out.println("-----------");
+        System.out.println();
+
+        List<Customer> customers = new ArrayList<>();
+        Optional<UserTable> ut1 = ur.findById(3L);
+        Optional<Address> a1 = ar.findById(2L);
+
+        customers.add(new Customer(0L, "Jan", "Kowalski",
+                "test@gmail.com", "123123723", a1.get(), ut1.get()));
+
+        cr.saveAll(customers);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.dekoracje.service;
 
-import com.example.dekoracje.model.entity.Product;
 import com.example.dekoracje.model.entity.ProductInOrder;
 
 import java.util.List;

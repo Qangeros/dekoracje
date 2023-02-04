@@ -1,6 +1,7 @@
 package com.example.dekoracje.service;
 
 import com.example.dekoracje.model.entity.Customer;
+import com.example.dekoracje.repository.AddressRepository;
 import com.example.dekoracje.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,18 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
     private DataValidatorService dataValidatorService;
 
     @Override
-    public List<Customer> getAllCustomerList() {
-        return customerRepository.findAll();
+    public List<Customer> getAllCustomerList() { // SPRAWDZANIE DODANEGO ADRESU
+        List<Customer> customers = customerRepository.findAll();
+        for (Customer customer : customers) {
+            customer.setAddress(addressRepository.findById(customer.getAddress().getId()).orElseThrow());
+        }
+        return customers;
     }
 
     @Override

@@ -10,16 +10,30 @@ import java.io.Serializable;
  * A DTO for the {@link Product} entity
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDto implements Serializable {
     private final Long id;
     private final Long supplierId;
+    private final String supplierName;
     private final String name;
     private final Double price;
+    private final String type;
 
     public ProductDto(Product product) {
         this.id = product.getId();
         this.supplierId = product.getSupplier().getId();
+        this.supplierName = product.getSupplier().getName();
         this.name = product.getName();
         this.price = product.getPrice();
+        this.type = product.getType().getName();
+    }
+
+    public ProductDto(String name, String type, Double price, String supplierName) {
+        this.id = null;
+        this.supplierId = null;
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.supplierName = supplierName;
     }
 }

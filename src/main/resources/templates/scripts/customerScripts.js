@@ -29,6 +29,7 @@ function getCustomer(event) {
         }
     });
 }
+
 function showAllCustomers(event) {
     event.preventDefault();
     $.ajax({
