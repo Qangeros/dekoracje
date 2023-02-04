@@ -11,4 +11,5 @@ public interface StockService {
     Stock saveStock(Stock stock);
     List<Stock> getStockBySearch(String searchString);
     void deleteStockById(Long id);
+    void updateStockAmount(Stock stock);
 }

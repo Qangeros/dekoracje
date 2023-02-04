@@ -67,7 +67,12 @@ public class StockController {
                     " ponieważ jest on powiązany z innymi rekordami w bazie danych.");
             return new ResponseEntity<>(error, HttpStatus.CONFLICT);
         }
+    }
 
+    @PutMapping("/update")
+    public ResponseEntity<String> updateStockAmount(@RequestBody Stock stock) {
+        stockService.updateStockAmount(stock);
+        return new ResponseEntity<>("Stock amount updated successfully!", HttpStatus.OK);
     }
 
 }
