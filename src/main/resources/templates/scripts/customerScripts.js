@@ -14,7 +14,7 @@ function getCustomer(event) {
                     table += "<td>" + customer.surname + "</td>"
                     table += "<td>" + customer.email + "</td>"
                     table += "<td>" + customer.phone + "</td>"
-                    table += "<td>" + customer.addressId + "</td>"
+                    table += "<td>" + customer.address + "</td>"
                     table += "<td style='text-align:center;'><i class='fa fa-trash'" +
                         " style='font-size:24px; cursor:pointer;' " +
                         "onclick='deleteCustomer(event, " + customer.id + ")'></i></td>"
@@ -22,6 +22,8 @@ function getCustomer(event) {
                 }
                 table += "</table>"
                 document.getElementById("customers").innerHTML = table;
+            } else {
+                $("#address-result").html("Nie znaleziono klienta").fadeIn().delay(3000).fadeOut()
             }
         },
         error: function() {
@@ -44,7 +46,7 @@ function showAllCustomers(event) {
                     table += "<td>" + customer.surname + "</td>"
                     table += "<td>" + customer.email + "</td>"
                     table += "<td>" + customer.phone + "</td>"
-                    table += "<td>" + customer.addressId + "</td>"
+                    table += "<td>" + customer.address + "</td>"
                     table += "<td style='text-align:center;'><i class='fa fa-trash' " +
                         "style='font-size:24px; cursor:pointer;' " +
                         "onclick='deleteCustomer(event, " + customer.id + ")'></i></td>"
@@ -90,5 +92,3 @@ function showForm(event){
     document.getElementById("form-container").style.display =
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";
 }
-
-//TODO: wybieranie adresu z listy i wyświetlanie go

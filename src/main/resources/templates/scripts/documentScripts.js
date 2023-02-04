@@ -21,7 +21,10 @@ function getDocument(event) {
                 }
                 table += "</table>"
                 document.getElementById("documents").innerHTML = table;
+            } else {
+                $("#address-result").html("Nie znaleziono dokumentu").fadeIn().delay(3000).fadeOut()
             }
+
         },
         error: function() {
             $("#document-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();

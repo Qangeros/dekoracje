@@ -2,6 +2,7 @@ package com.example.dekoracje.model.dto;
 
 import com.example.dekoracje.model.dto.SupplierDto;
 import com.example.dekoracje.model.entity.Product;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;

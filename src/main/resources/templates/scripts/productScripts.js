@@ -11,8 +11,9 @@ function getProduct(event) {
                 for (var i = 0; i < response.length; i++) {
                     var product = response[i];
                     table += "<tr><td>" + product.name + "</td>"
-                    table += "<td>" + product.price + "</td>"
-                    table += "<td>" + product.supplierId + "</td>"
+                    table += "<td>" + product.type + "</td>"
+                    table += "<td>" + product.price.toFixed(2) + " zł </td>"
+                    table += "<td>" + product.supplierName + "</td>"
                     table += "<td style='text-align:center;'><i class='fa fa-trash'" +
                         " style='font-size:24px; cursor:pointer;' " +
                         "onclick='deleteProduct(event, " + product.id + ")'></i></td>"
@@ -20,6 +21,8 @@ function getProduct(event) {
                 }
                 table += "</table>"
                 document.getElementById("products").innerHTML = table;
+            } else {
+                $("#address-result").html("Nie znaleziono produktu").fadeIn().delay(3000).fadeOut()
             }
         },
         error: function() {
@@ -38,8 +41,9 @@ function showAllProducts(event) {
                 for (var i = 0; i < response.length; i++) {
                     var product = response[i];
                     table += "<tr><td>" + product.name + "</td>"
-                    table += "<td>" + product.price + "</td>"
-                    table += "<td>" + product.supplierId + "</td>"
+                    table += "<td>" + product.type + "</td>"
+                    table += "<td>" + product.price.toFixed(2) + " zł </td>"
+                    table += "<td>" + product.supplierName + "</td>"
                     table += "<td style='text-align:center;'><i class='fa fa-trash' " +
                         "style='font-size:24px; cursor:pointer;' " +
                         "onclick='deleteProduct(event, " + product.id + ")'></i></td>"

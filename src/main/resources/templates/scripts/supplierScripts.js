@@ -11,7 +11,7 @@ function getSupplier(event) {
                 for (var i = 0; i < response.length; i++) {
                     var supplier = response[i];
                     table += "<tr><td>" + supplier.name + "</td>"
-                    table += "<td>" + supplier.addressId + "</td>"
+                    table += "<td>" + supplier.address + "</td>"
                     table += "<td>" + supplier.email + "</td>"
                     table += "<td>" + supplier.phone + "</td>"
                     table += "<td>" + supplier.nip + "</td>"
@@ -22,6 +22,8 @@ function getSupplier(event) {
                 }
                 table += "</table>"
                 document.getElementById("suppliers").innerHTML = table;
+            } else {
+                $("#address-result").html("Nie znaleziono dostawcy").fadeIn().delay(3000).fadeOut()
             }
         },
         error: function() {
@@ -40,7 +42,7 @@ function showAllSuppliers(event) {
                 for (var i = 0; i < response.length; i++) {
                     var supplier = response[i];
                     table += "<tr><td>" + supplier.name + "</td>"
-                    table += "<td>" + supplier.addressId + "</td>"
+                    table += "<td>" + supplier.address + "</td>"
                     table += "<td>" + supplier.email + "</td>"
                     table += "<td>" + supplier.phone + "</td>"
                     table += "<td>" + supplier.nip + "</td>"
@@ -89,5 +91,3 @@ function showForm(event){
     document.getElementById("form-container").style.display =
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";
 }
-
-//TODO: wybieranie adresu z listy i wyświetlanie go

@@ -21,6 +21,8 @@ function getAddress(event) {
                 }
                 table += "</table>"
                 document.getElementById("addresses").innerHTML = table;
+            } else {
+                $("#address-result").html("Nie znaleziono adresu").fadeIn().delay(3000).fadeOut()
             }
         },
         error: function() {

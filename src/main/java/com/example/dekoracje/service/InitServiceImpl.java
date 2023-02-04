@@ -26,6 +26,8 @@ public class InitServiceImpl implements InitService {
     ProductRepository pr;
     @Autowired
     StockRepository str;
+    @Autowired
+    CustomerRepository cr;
 
     @PostConstruct
     public void init() {
