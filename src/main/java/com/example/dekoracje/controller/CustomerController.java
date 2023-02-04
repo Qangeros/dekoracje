@@ -48,7 +48,6 @@ public class CustomerController {
     @ResponseBody
     public List<CustomerDto> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomerList();
-
         return customers.stream()
                 .map(c -> new CustomerDto(c.getName(), c.getSurname(), c.getPhone(), c.getEmail(),
                         c.getAddress().getStreet() + ", "
