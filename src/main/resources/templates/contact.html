@@ -38,6 +38,18 @@
       <li class="nav-item">
         <a class="nav-link" th:href="@{/login}">Zaloguj się</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownSubPages" data-toggle="dropdown">
+          Panele
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownSubPages">
+          <a class="dropdown-item" th:href="@{/address}">Adresy</a>
+          <a class="dropdown-item" th:href="@{/customer}">Klienci</a>
+          <a class="dropdown-item" th:href="@{/document}">Dokumenty</a>
+          <a class="dropdown-item" th:href="@{/supplier}">Dostawcy</a>
+          <a class="dropdown-item" th:href="@{/product}">Produkty</a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
