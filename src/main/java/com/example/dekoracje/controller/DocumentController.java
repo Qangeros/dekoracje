@@ -50,8 +50,6 @@ public class DocumentController {
                 .toList();
     }
 
-//    @GetMapping("/getbyaddressid") // TODO: Może do wyszukiwania dokumentów po adresie?
-
     @PostMapping("/add")
     public ResponseEntity<Document> addDocument(@RequestBody Document document) {
         Document savedDocument = documentService.saveDocument(document);

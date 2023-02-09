@@ -55,8 +55,6 @@ public class ProductController {
                 .toList();
     }
 
-//    @GetMapping("/getbycategory") //TODO: Może się doda? ni chuja sie nie doda XDDD
-
     @PostMapping("/addold")
     public ResponseEntity<Product> addProductOld(@RequestBody Product product) {
         Product savedProduct = productService.saveProduct(product);
@@ -82,6 +80,30 @@ public class ProductController {
                     " ponieważ jest on powiązany z innymi rekordami w bazie danych.");
             return new ResponseEntity<>(error, HttpStatus.CONFLICT);
         }
+    }
+
+    // TODO: DODAJ METODĘ DO DODAWANIA PRODUKTÓW DO KOSZYKA, check po id czy już jest w koszyku,
+    //  jeśli tak to zwiększ ilość
+    @PutMapping("/addtocart")
+    public ResponseEntity<Product> addProductListToCart(@RequestBody List<ProductDto> productList) {
+        productList.forEach(product -> {
+            isProductInCart(product);
+            Supplier supplier = supplierService.getSupplierById(product.getSupplierId());
+            Product savedProduct = productService.saveProduct(
+                    new Product(0L, supplier, product.getName(), product.getPrice(), product.getType()));
+        });
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    // TODO: TU DO TESTÓW, ostatecznie koszyk serwis
+    private boolean isProductInCart(ProductDto dto) {
+//       OrderFromSupplier item = orderFromSupplierService.getItemById(dto.getId()) // coś takiego
+//       if (item != null) {
+//
+//       }
+
+        return false;
     }
 
 }
