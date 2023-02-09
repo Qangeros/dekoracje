@@ -28,13 +28,4 @@ public class ProductDto implements Serializable {
         this.price = product.getPrice();
         this.type = product.getType().getName();
     }
-
-    public ProductDto(String name, String type, Double price, String supplierName) {
-        this.id = null;
-        this.supplierId = null;
-        this.name = name;
-        this.type = type;
-        this.price = price;
-        this.supplierName = supplierName;
-    }
 }

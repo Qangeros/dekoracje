@@ -9,8 +9,8 @@ public class DataValidatorServiceImpl implements DataValidatorService{
 
     @Override
     public boolean isNameValid(String name) {
-        String regex = "^[a-z ,.'-]+$";
-        return name != null && Pattern.matches(regex, name) && (2 < name.length() && name.length() < 30);
+        String regex = "^[A-Za-z0-9_]{4,29}$";
+        return name != null && Pattern.matches(regex, name);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class DataValidatorServiceImpl implements DataValidatorService{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+                + "(?=\\S+$).{6,30}$";
         return password != null && Pattern.matches(regex, password);
     }
 

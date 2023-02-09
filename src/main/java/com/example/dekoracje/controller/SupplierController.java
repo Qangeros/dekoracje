@@ -36,10 +36,7 @@ public class SupplierController {
     public List<SupplierDto> getSupplier(@RequestParam(value="searchString", required = true) String searchString) {
         List<Supplier> suppliers = supplierService.getSupplierBySearch(searchString);
         return suppliers.stream()
-                .map(s -> new SupplierDto(s.getName(), s.getEmail(), s.getPhone(), s.getNip(),
-                        s.getAddress().getStreet() + ", "
-                                + s.getAddress().getCity() + ", "
-                                + s.getAddress().getPostalCode()))
+                .map(SupplierDto::new)
                 .toList();
     }
 

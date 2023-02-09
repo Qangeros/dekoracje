@@ -30,7 +30,7 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public Document saveDocument(Document document) { // TODO: sprawdzić czy nie trzeba dodać walidacji
+    public Document saveDocument(Document document) { // TODO: sprawdzić, czy nie trzeba dodać walidacji
         return documentRepository.save(document);
     }
 
