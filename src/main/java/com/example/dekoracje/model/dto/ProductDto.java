@@ -1,6 +1,5 @@
 package com.example.dekoracje.model.dto;
 
-import com.example.dekoracje.model.dto.SupplierDto;
 import com.example.dekoracje.model.entity.Product;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -26,6 +25,15 @@ public class ProductDto implements Serializable {
         this.supplierName = product.getSupplier().getName();
         this.name = product.getName();
         this.price = product.getPrice();
-        this.type = product.getType().getName();
+        this.type = product.getType();
+    }
+
+    public ProductDto(String name, Double price, Long supplierId, String type) {
+        this.id = null;
+        this.supplierId = supplierId;
+        this.supplierName = null;
+        this.name = name;
+        this.price = price;
+        this.type = type;
     }
 }

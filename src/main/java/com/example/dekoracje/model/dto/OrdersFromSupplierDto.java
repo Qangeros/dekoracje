@@ -14,8 +14,7 @@ import java.sql.Timestamp;
 @Data
 public class OrdersFromSupplierDto implements Serializable {
     private final Long id;
-    private final String order_number;
-    private final Long supplierId;
+    private final String orderNumber;
     private final Long documentId;
     private final Double price;
     private final Timestamp timestamp;
@@ -23,8 +22,7 @@ public class OrdersFromSupplierDto implements Serializable {
 
     public OrdersFromSupplierDto(OrdersFromSupplier ordersFromSupplier) {
         this.id = ordersFromSupplier.getId();
-        this.order_number = ordersFromSupplier.getOrderNumber();
-        this.supplierId = ordersFromSupplier.getSupplier().getId();
+        this.orderNumber = ordersFromSupplier.getOrderNumber();
         this.documentId = ordersFromSupplier.getDocument().getId();
         this.price = ordersFromSupplier.getPrice();
         this.timestamp = ordersFromSupplier.getTimestamp();

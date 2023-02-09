@@ -3,7 +3,9 @@ package com.example.dekoracje.controller;
 import com.example.dekoracje.controller.util.ErrorResponse;
 import com.example.dekoracje.model.dto.ProductDto;
 import com.example.dekoracje.model.entity.Product;
+import com.example.dekoracje.model.entity.Supplier;
 import com.example.dekoracje.service.ProductService;
+import com.example.dekoracje.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private SupplierService supplierService;
 
     @GetMapping("")
     public String showProductPage() {
@@ -50,13 +55,21 @@ public class ProductController {
                 .toList();
     }
 
-//    @GetMapping("/getbycategory") //TODO: Może się doda?
+//    @GetMapping("/getbycategory") //TODO: Może się doda? ni chuja sie nie doda XDDD
 
-    @PostMapping("/add")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+    @PostMapping("/addold")
+    public ResponseEntity<Product> addProductOld(@RequestBody Product product) {
         Product savedProduct = productService.saveProduct(product);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
+
+     @PostMapping("/add")
+     public ResponseEntity<Product> addProduct(@RequestBody ProductDto product) {
+         Supplier supplier = supplierService.getSupplierById(product.getSupplierId());
+         Product savedProduct = productService.saveProduct(
+                 new Product(0L, supplier, product.getName(), product.getPrice(), product.getType()));
+         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+     }
 
     @DeleteMapping("/deletebyid")
     @ResponseBody

@@ -1,5 +1,6 @@
 package com.example.dekoracje.model.entity;
 
+import com.example.dekoracje.model.dto.ProductDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,7 +28,7 @@ public class Product {
     @Column(nullable = false)
     private Double price;
 
-    @OneToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_product_type"))
-    private Type type;
+    @Column(nullable = false)
+    private String type;
+
 }

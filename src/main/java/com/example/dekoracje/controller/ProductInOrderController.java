@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/productinorder")
+@RequestMapping("/cart")
 public class ProductInOrderController {
 
     @Autowired

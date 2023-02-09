@@ -37,7 +37,6 @@ public class InitServiceImpl implements InitService {
         System.out.println();
 
         initUserType();
-        initType();
         initUsers();
         initAddress();
         initSupplier();
@@ -135,14 +134,11 @@ public class InitServiceImpl implements InitService {
 
         List<Product> products = new ArrayList<>();
         Optional<Supplier> s1 = sr.findById(1L);
-        Optional<Type> t1 = tr.findById(4L);
-        Optional<Type> t2 = tr.findById(7L);
-        Optional<Type> t3 = tr.findById(5L);
 
-        products.add(new Product(0L, s1.get(), "Róża czerwona", 5.0, t1.get()));
-        products.add(new Product(0L, s1.get(), "Róża biała", 6.50, t1.get()));
-        products.add(new Product(0L, s1.get(), "Skrzynka drewniana 15x20x30 cm", 24.99, t2.get()));
-        products.add(new Product(0L, s1.get(), "Wstążka czerwona 50m", 20.0, t3.get()));
+        products.add(new Product(0L, s1.get(), "Róża czerwona", 5.0, "Kwiaty"));
+        products.add(new Product(0L, s1.get(), "Róża biała", 6.50, "Kwiaty"));
+        products.add(new Product(0L, s1.get(), "Skrzynka drewniana 15x20x30 cm", 24.99, "Drewno"));
+        products.add(new Product(0L, s1.get(), "Wstążka czerwona 50m", 20.0, "Dekoracje"));
 
         pr.saveAll(products);
 

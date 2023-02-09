@@ -23,10 +23,6 @@ public class OrdersFromSupplier {
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(name = "fk_ofs_supplier"))
-    private Supplier supplier;
-
     @OneToOne
     @JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "fk_ofs_document"))
     private Document document; // możliwe że do wywalenia

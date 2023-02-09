@@ -39,7 +39,6 @@ function showAllCustomers(event) {
         type: 'GET',
         success: function(response) {
             var table = "<table border='1'>"
-            if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
                     var customer = response[i];
                     table += "<tr><td>" + customer.name + "</td>"
@@ -54,7 +53,6 @@ function showAllCustomers(event) {
                 }
                 table += "</table>"
                 document.getElementById("customers").innerHTML = table;
-            }
         },
         error: function() {
             $("#customers-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
