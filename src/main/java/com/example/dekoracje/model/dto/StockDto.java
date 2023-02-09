@@ -25,8 +25,8 @@ public class StockDto implements Serializable {
         this.amount = stock.getAmount();
     }
 
-    public StockDto(String productName, Integer amount) {
-        this.id = null;
+    public StockDto(Long id, String productName, Integer amount) {
+        this.id = id;
         this.productId = null;
         this.productName = productName;
         this.amount = amount;

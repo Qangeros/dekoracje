@@ -39,8 +39,8 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public void updateStockAmount(Stock stock) {
-        stockRepository.updateStockAmount(stock.getId(), stock.getAmount());
+    public void updateStockAmount(Long id, Integer amount) {
+        stockRepository.updateStockAmount(id, amount);
     }
 
 }
