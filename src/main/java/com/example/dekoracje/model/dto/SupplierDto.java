@@ -32,15 +32,4 @@ public class SupplierDto implements Serializable {
         this.address = supplier.getAddress().getStreet() + ", " +
                 supplier.getAddress().getCity() + " " + supplier.getAddress().getPostalCode();
     }
-
-    public SupplierDto(String name, String email, String phone, String nip, String address) {
-        this.id = null;
-        this.name = name;
-        this.addressId = null;
-        this.email = email;
-        this.phone = phone;
-        this.nip = nip;
-        this.userId = null;
-        this.address = address;
-    }
 }

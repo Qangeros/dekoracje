@@ -38,7 +38,7 @@ public class StockController {
     public List<StockDto> getStock(@RequestParam(value="searchString", required = true) String searchString) {
         List<Stock> stocks = stockService.getStockBySearch(searchString);
         return stocks.stream()
-                .map(s -> new StockDto(s.getId(), s.getProduct().getName(), s.getAmount()))
+                .map(StockDto::new)
                 .toList();
     }
 
@@ -47,7 +47,7 @@ public class StockController {
     public List<StockDto> getAllStocks() {
         List<Stock> stocks = stockService.getAllStockList();
         return stocks.stream()
-                .map(s -> new StockDto(s.getId(), s.getProduct().getName(), s.getAmount()))
+                .map(StockDto::new)
                 .toList();
     }
 

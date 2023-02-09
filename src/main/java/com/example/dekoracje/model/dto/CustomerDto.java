@@ -32,16 +32,4 @@ public class CustomerDto implements Serializable {
         this.address = customer.getAddress().getStreet() + ", " +
                 customer.getAddress().getCity() + " " + customer.getAddress().getPostalCode();
     }
-
-    public CustomerDto(String name, String surname, String email, String phone, String address) {
-        this.id = null;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phone = phone;
-        this.addressId = null;
-        this.userId = null;
-        this.address = address;
-    }
-
 }

@@ -46,10 +46,7 @@ public class SupplierController {
         List<Supplier> suppliers = supplierService.getAllSupplierList();
 
         return suppliers.stream()
-                .map(s -> new SupplierDto(s.getName(), s.getEmail(), s.getPhone(), s.getNip(),
-                        s.getAddress().getStreet() + ", "
-                        + s.getAddress().getCity() + ", "
-                        + s.getAddress().getPostalCode()))
+                .map(SupplierDto::new)
                 .toList();
     }
 

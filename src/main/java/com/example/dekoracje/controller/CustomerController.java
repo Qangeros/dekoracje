@@ -37,10 +37,7 @@ public class CustomerController {
     public List<CustomerDto> getCustomer(@RequestParam(value="searchString", required = true) String searchString) {
         List<Customer> customers = customerService.getCustomerBySearch(searchString);
         return customers.stream()
-                .map(c -> new CustomerDto(c.getName(), c.getSurname(), c.getPhone(), c.getEmail(),
-                        c.getAddress().getStreet() + ", "
-                                + c.getAddress().getCity() + ", "
-                                + c.getAddress().getPostalCode()))
+                .map(CustomerDto::new)
                 .toList();
     }
 
