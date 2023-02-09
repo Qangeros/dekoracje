@@ -14,7 +14,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "orders_from_supplier")
 public class OrdersFromSupplier {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

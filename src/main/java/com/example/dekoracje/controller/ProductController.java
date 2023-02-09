@@ -78,7 +78,7 @@ public class ProductController {
             productService.deleteProductById(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
-            ErrorResponse error = new ErrorResponse("Nie można produktu," +
+            ErrorResponse error = new ErrorResponse("Nie można usunąć produktu," +
                     " ponieważ jest on powiązany z innymi rekordami w bazie danych.");
             return new ResponseEntity<>(error, HttpStatus.CONFLICT);
         }

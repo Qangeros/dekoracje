@@ -39,7 +39,6 @@ function showAllStocks(event) {
         success: function(response) {
             response.sort((a, b) => (a.id > b.id) ? 1 : -1);
             var table = "<table border='1'>"
-            if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
                     var stock = response[i];
                     table += "<tr><td>" + stock.id + "</td>"
@@ -53,7 +52,6 @@ function showAllStocks(event) {
                 }
                 table += "</table>"
                 document.getElementById("stocks").innerHTML = table;
-            }
         },
         error: function() {
             $("#stock-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();

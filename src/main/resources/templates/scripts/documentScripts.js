@@ -38,7 +38,6 @@ function showAllDocuments(event) {
         type: 'GET',
         success: function(response) {
             var table = "<table border='1'>"
-            if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
                     var document = response[i];
                     table += "<tr><td>" + document.name + "</td>"
@@ -52,7 +51,6 @@ function showAllDocuments(event) {
                 }
                 table += "</table>"
                 document.getElementById("documents").innerHTML = table;
-            }
         },
         error: function() {
             $("#documents-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();

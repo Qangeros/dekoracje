@@ -37,7 +37,6 @@ function showAllProducts(event) {
         type: 'GET',
         success: function(response) {
             var table = "<table border='1'>"
-            if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
                     var product = response[i];
                     table += "<tr><td>" + product.name + "</td>"
@@ -51,7 +50,6 @@ function showAllProducts(event) {
                 }
                 table += "</table>"
                 document.getElementById("products").innerHTML = table;
-            }
         },
         error: function() {
             $("#products-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
@@ -81,6 +79,7 @@ function addProduct(event) {
         name: document.getElementById("name").value,
         price: document.getElementById("price").value,
         supplierId: document.getElementById("supplierId").value,
+        type: document.getElementById("type").value
     };
     $.ajax({
         url: '/product/add',
@@ -91,6 +90,7 @@ function addProduct(event) {
             document.getElementById("name").value = "";
             document.getElementById("price").value = "";
             document.getElementById("supplierId").value = "";
+            document.getElementById("type").value = "";
             showAllProducts(event);
             $("#product-result").html("Dodano produkt").fadeIn().delay(3000).fadeOut();
         },

@@ -38,7 +38,6 @@ function showAllSuppliers(event) {
         type: 'GET',
         success: function(response) {
             var table = "<table border='1'>"
-            if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
                     var supplier = response[i];
                     table += "<tr><td>" + supplier.name + "</td>"
@@ -53,7 +52,6 @@ function showAllSuppliers(event) {
                 }
                 table += "</table>"
                 document.getElementById("suppliers").innerHTML = table;
-            }
         },
         error: function() {
             $("#suppliers-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();

@@ -37,7 +37,6 @@ function showAllAddresses(event) {
         type: 'GET',
         success: function(response) {
             var table = "<table border='1'>"
-            if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
                     var address = response[i];
                     table += "<tr><td>" + address.street + "</td>"
@@ -51,7 +50,6 @@ function showAllAddresses(event) {
                 }
                 table += "</table>"
                 document.getElementById("addresses").innerHTML = table;
-            }
         },
         error: function() {
             $("#address-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();

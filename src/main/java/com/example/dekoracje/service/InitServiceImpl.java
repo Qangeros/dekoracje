@@ -15,8 +15,6 @@ public class InitServiceImpl implements InitService {
     @Autowired
     UserTypeRepository utr;
     @Autowired
-    TypeRepository tr;
-    @Autowired
     UserRepository ur;
     @Autowired
     AddressRepository ar;
@@ -43,24 +41,6 @@ public class InitServiceImpl implements InitService {
         initProduct();
         initStock();
         initCustomer();
-    }
-
-    @Override
-    public void initType() {
-        System.out.println("initType");
-        System.out.println("--------");
-        System.out.println();
-
-        List<Type> types = new ArrayList<>();
-        types.add(new Type(0L, "Kwiaciarnia", false));
-        types.add(new Type(0L, "Cukiernia", false));
-        types.add(new Type(0L, "Sklep drewniany", false));
-        types.add(new Type(0L, "Kwiaty", true));
-        types.add(new Type(0L, "Wstążki", true));
-        types.add(new Type(0L, "Papierowe", true));
-        types.add(new Type(0L, "Drewniane", true));
-        types.add(new Type(0L, "Metalowe", true));
-        tr.saveAll(types);
     }
 
     @Override
