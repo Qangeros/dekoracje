@@ -24,7 +24,7 @@ public class OrdersFromSupplier {
 
     @OneToOne
     @JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "fk_ofs_document"))
-    private Document document; // możliwe że do wywalenia
+    private Document document; // możliwe, że do usunięcia
 
     @Column(name = "price", nullable = false)
     private Double price;
