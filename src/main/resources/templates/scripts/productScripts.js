@@ -14,6 +14,9 @@ function getProduct(event) {
                     table += "<td>" + product.type + "</td>"
                     table += "<td>" + product.price.toFixed(2) + " zł </td>"
                     table += "<td>" + product.supplierName + "</td>"
+                    table += "<td style='text-align:center;'><i class='fa fa-cart-plus' " +
+                        "style='font-size:24px; cursor:pointer;' " +
+                        "onclick='addToCart(event, " + product.id + ")'></i></td>"
                     table += "<td style='text-align:center;'><i class='fa fa-trash'" +
                         " style='font-size:24px; cursor:pointer;' " +
                         "onclick='deleteProduct(event, " + product.id + ")'></i></td>"
@@ -121,4 +124,40 @@ function showForm(event) {
     document.getElementById("form-container").style.display =
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";
 }
-//TODO: supplierId jako lista, i żeby wyświetlało nazwę zamiast id, typ
+
+function formAddSuppliers(event) {
+    event.preventDefault();
+    $.ajax({
+        url: '/supplier/getall',
+        type: 'GET',
+        success: function (response) {
+            for (var i = 0; i < response.length; i++) {
+                var supplier = response[i];
+                $("#supplierId").append($("<option>", {
+                    value: supplier.id,
+                    text: supplier.name
+                }));
+            }
+        },
+        error: function () {
+            $("#product-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
+        }
+    });
+}
+
+function addToCart(event, id) {
+    event.preventDefault();
+    $.ajax({
+        url: '/cart/add',
+        type: 'POST',
+        data: {id: id},
+        success: function () {
+            showAllProducts(event);
+            $("#product-result").html("Dodano produkt do koszyka").fadeIn().delay(3000).fadeOut();
+        },
+        error: function () {
+            $("#product-result").html("Błąd podczas dodawania produktu do koszyka")
+                .fadeIn().delay(3000).fadeOut();
+        }
+    });
+}
