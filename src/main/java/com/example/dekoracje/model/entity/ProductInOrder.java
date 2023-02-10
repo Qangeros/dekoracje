@@ -28,6 +28,8 @@ public class ProductInOrder {
     private Double price;
 
     @OneToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name="fk_pio_ofs"))
+    @JoinColumn(nullable = true, foreignKey = @ForeignKey(name="fk_pio_ofs"))
     private OrdersFromSupplier ordersFromSupplier;
+
+
 }

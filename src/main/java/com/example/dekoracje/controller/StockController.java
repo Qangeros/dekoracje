@@ -70,17 +70,17 @@ public class StockController {
         }
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<ErrorResponse> updateStockAmount(@RequestParam(value="id", required = true) Long id,
-                                                           @RequestParam(value="amount", required = true) Integer amount) {
-        try {
-            stockService.updateStockAmount(id, amount);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (DataIntegrityViolationException e) {
-            ErrorResponse error = new ErrorResponse("Wystąpił błąd podczas aktualizacji stanu magazynowego.");
-            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-        }
-    }
+//    @PutMapping("/update")
+//    public ResponseEntity<ErrorResponse> updateStockAmount(@RequestParam(value="id", required = true) Long id,
+//                                                           @RequestParam(value="amount", required = true) Integer amount) {
+//        try {
+//            stockService.updateStockAmount(id, amount);
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        } catch (DataIntegrityViolationException e) {
+//            ErrorResponse error = new ErrorResponse("Wystąpił błąd podczas aktualizacji stanu magazynowego.");
+//            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+//        }
+//    }
 
     @Transactional
     @PutMapping("/updatelist")

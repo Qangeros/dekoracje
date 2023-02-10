@@ -35,8 +35,29 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
 
     @Override
     public List<ProductInOrder> saveAllProductInOrderList() {
-        List<ProductInOrder> productInOrderList = getAllProductInOrderList();
+        List<ProductInOrder> productInOrderList = getAllCartProducts();
         return productInOrderRepository.saveAll(productInOrderList);
+    }
+
+    @Override
+    public void updateProductInOrder(Long id, Integer amount) {
+        productInOrderRepository.updateProductInOrder(id, amount);
+    }
+
+    @Override
+    public List<ProductInOrder> getAllCartProducts() {
+        return productInOrderRepository.getAllCartProducts();
+    }
+
+    @Override
+    public boolean isProductInCart(Long id) {
+        List<ProductInOrder> productInOrders = getAllCartProducts();
+        for (ProductInOrder productInOrder : productInOrders) {
+            if(productInOrder.getProduct().getId().equals(id)){
+                return true;
+            }
+        }
+        return false;
     }
 
 

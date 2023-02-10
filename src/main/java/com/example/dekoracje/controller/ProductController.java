@@ -2,6 +2,7 @@ package com.example.dekoracje.controller;
 
 import com.example.dekoracje.controller.util.ErrorResponse;
 import com.example.dekoracje.model.dto.ProductDto;
+import com.example.dekoracje.model.entity.OrdersFromSupplier;
 import com.example.dekoracje.model.entity.Product;
 import com.example.dekoracje.model.entity.Supplier;
 import com.example.dekoracje.service.ProductService;
@@ -81,29 +82,25 @@ public class ProductController {
             return new ResponseEntity<>(error, HttpStatus.CONFLICT);
         }
     }
-
-    // TODO: DODAJ METODĘ DO DODAWANIA PRODUKTÓW DO KOSZYKA, check po id czy już jest w koszyku,
-    //  jeśli tak to zwiększ ilość
-    @PutMapping("/addtocart")
-    public ResponseEntity<Product> addProductListToCart(@RequestBody List<ProductDto> productList) {
-        productList.forEach(product -> {
-            isProductInCart(product);
-            Supplier supplier = supplierService.getSupplierById(product.getSupplierId());
-            Product savedProduct = productService.saveProduct(
-                    new Product(0L, supplier, product.getName(), product.getPrice(), product.getType()));
-        });
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+//
+//    // TODO: DODAJ METODĘ DO DODAWANIA PRODUKTÓW DO KOSZYKA, check po id czy już jest w koszyku,
+//    //  jeśli tak to zwiększ ilość
+//    @PostMapping("/addtocart")
+//    public ResponseEntity<Product> addProductListToCart(@RequestBody List<ProductDto> productList) {
+//        productList.forEach(product -> {
+//            isProductInCart(product);
+//            Supplier supplier = supplierService.getSupplierById(product.getSupplierId());
+//            Product savedProduct = productService.saveProduct(
+//                    new Product(0L, supplier, product.getName(), product.getPrice(), product.getType()));
+//        });
+//
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
 
     // TODO: TU DO TESTÓW, ostatecznie koszyk serwis
-    private boolean isProductInCart(ProductDto dto) {
-//       OrderFromSupplier item = orderFromSupplierService.getItemById(dto.getId()) // coś takiego
-//       if (item != null) {
-//
-//       }
-
-        return false;
-    }
+//    private boolean isProductInCart(ProductDto dto) {
+//        OrdersFromSupplier item = ordersFromSupplierService.getItemById(dto.getId());
+//        return item != null;
+//    }
 
 }

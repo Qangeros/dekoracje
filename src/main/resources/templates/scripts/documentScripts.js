@@ -115,4 +115,4 @@ function showForm(event){
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";
 }
 
-//TODO: zamiast wpisywania nazwy generator
+//TODO: generowanie automatyczne przy dodawaniu produktów do stocku

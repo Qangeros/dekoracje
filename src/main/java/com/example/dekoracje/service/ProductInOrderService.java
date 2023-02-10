@@ -11,4 +11,8 @@ public interface ProductInOrderService {
     ProductInOrder saveProductInOrder(ProductInOrder productInOrder);
     void deleteProductInOrderById(Long id);
     List<ProductInOrder> saveAllProductInOrderList();
+    void updateProductInOrder(Long id, Integer amount);
+    List<ProductInOrder> getAllCartProducts();
+    boolean isProductInCart(Long id);
+
 }
