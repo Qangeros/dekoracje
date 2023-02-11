@@ -1,6 +1,11 @@
 document.getElementById("submitBtn").addEventListener("click", function () {
     event.preventDefault();
-    if ($("input[name='password']").val() === $("input[name='password1']").val()) {
+    if (!$("input[name='name']:checked").val() || !$("input[name='username']").val()
+        || !$("input[name='email']").val()) {
+        $("#registration-result").html("Uzupełnij wszystkie pola").fadeIn().delay(3000).fadeOut();
+        return;
+    }
+    if ($("input[name='password']").val() === $("input[name='password1']").val() && $("input[name='password']") != "") {
         var password = $("input[name='password']").val();
         var bcrypt = dcodeIO.bcrypt;
         var salt = bcrypt.genSaltSync(10);
@@ -9,7 +14,7 @@ document.getElementById("submitBtn").addEventListener("click", function () {
                 username: $("input[name='username']").val(),
                 password: hash,
                 email: $("input[name='email']").val(),
-                userType: $("input[name='userType']:checked").val()
+                role: $("input[name='name']:checked").val()
             };
             $.ajax({
                 type: "POST",
@@ -24,5 +29,7 @@ document.getElementById("submitBtn").addEventListener("click", function () {
                     $("#registration-result").html("Wystąpił błąd podczas rejestracji").fadeIn().delay(3000).fadeOut();
                 }
             });
+    } else {
+        $("#registration-result").html("Hasła nie zgadzają się!").fadeIn().delay(3000).fadeOut();
     }
 });

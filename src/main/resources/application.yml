@@ -18,4 +18,4 @@ spring:
     web-application-type: servlet
   web:
     resources:
-      static-locations: classpath:/static/, classpath:/templates/scripts/
+      static-locations: classpath:/static/, classpath:/templates/

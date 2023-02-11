@@ -13,8 +13,6 @@ import java.util.Optional;
 @Service
 public class InitServiceImpl implements InitService {
     @Autowired
-    UserTypeRepository utr;
-    @Autowired
     UserRepository ur;
     @Autowired
     AddressRepository ar;
@@ -34,7 +32,6 @@ public class InitServiceImpl implements InitService {
         System.out.println("-----------");
         System.out.println();
 
-        initUserType();
         initUsers();
         initAddress();
         initSupplier();
@@ -50,12 +47,6 @@ public class InitServiceImpl implements InitService {
         System.out.println();
 
         List<UserTable> users = new ArrayList<>();
-        Optional<UserType> userType1 = utr.findById(1L);
-        Optional<UserType> userType2 = utr.findById(2L);
-        Optional<UserType> userType3 = utr.findById(3L);
-        UserType admin = userType1.get();
-        UserType supplier = userType2.get();
-        UserType customer = userType3.get();
         users.add(new UserTable(0L,"Admin", "Admin", "admin@admin.com", UserRole.ADMIN));
         users.add(new UserTable(0L,"Suplerek", "Sup", "sklepmiesny@gmail.com", UserRole.SUPPLIER));
         users.add(new UserTable(0L,"Customer1", "Cust", "cust@cust.com", UserRole.CUSTOMER));
