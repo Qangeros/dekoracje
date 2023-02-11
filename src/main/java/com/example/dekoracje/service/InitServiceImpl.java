@@ -70,9 +70,9 @@ public class InitServiceImpl implements InitService {
         UserType admin = userType1.get();
         UserType supplier = userType2.get();
         UserType customer = userType3.get();
-        users.add(new UserTable(0L,"Admin", "Admin", "admin@admin.com", admin));
-        users.add(new UserTable(0L,"Suplerek", "Sup", "sklepmiesny@gmail.com", supplier));
-        users.add(new UserTable(0L,"Customer1", "Cust", "cust@cust.com", customer));
+        users.add(new UserTable(0L,"Admin", "Admin", "admin@admin.com", UserRole.ADMIN));
+        users.add(new UserTable(0L,"Suplerek", "Sup", "sklepmiesny@gmail.com", UserRole.SUPPLIER));
+        users.add(new UserTable(0L,"Customer1", "Cust", "cust@cust.com", UserRole.CUSTOMER));
         ur.saveAll(users);
     }
 

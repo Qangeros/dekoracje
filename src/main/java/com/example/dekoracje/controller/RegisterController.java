@@ -26,15 +26,15 @@ public class RegisterController {
         return "register";
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<UserTable> registerUser(@RequestBody UserTable userTable) {
-        if (userTable.getUserType().getName().equals("customer")){
-            userTable.getUserType().setId(CUSTOMER_TYPE_ID);
-        }
-        else if (userTable.getUserType().getName().equals("supplier")) {
-            userTable.getUserType().setId(SUPPLIER_TYPE_ID);
-        }
-        UserTable savedUser = userService.registerUser(userTable);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-    }
+//    @PostMapping("/add")
+//    public ResponseEntity<UserTable> registerUser(@RequestBody UserTable userTable) {
+//        if (userTable.getUserType().getName().equals("customer")){
+//            userTable.getUserType().setId(CUSTOMER_TYPE_ID);
+//        }
+//        else if (userTable.getUserType().getName().equals("supplier")) {
+//            userTable.getUserType().setId(SUPPLIER_TYPE_ID);
+//        }
+//        UserTable savedUser = userService.registerUser(userTable);
+//        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+//    }
 }
