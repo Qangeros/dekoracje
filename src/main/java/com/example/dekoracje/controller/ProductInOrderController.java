@@ -69,7 +69,8 @@ public class ProductInOrderController {
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
-    @PostMapping("/deletebyid")
+    @DeleteMapping("/deletebyid")
+    @ResponseBody
     public ResponseEntity<ProductInOrder> deleteProductInOrder(@RequestParam(value="id", required = true) Long id) {
         productInOrderService.deleteProductInOrderById(id);
         return new ResponseEntity<>(HttpStatus.OK);
