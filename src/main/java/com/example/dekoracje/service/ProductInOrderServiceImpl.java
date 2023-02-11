@@ -45,6 +45,11 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
     }
 
     @Override
+    public void updateProductInOrder(ProductInOrder productInOrder) {
+        productInOrderRepository.updateProductInOrder(productInOrder);
+    }
+
+    @Override
     public List<ProductInOrder> getAllCartProducts() {
         return productInOrderRepository.getAllCartProducts();
     }

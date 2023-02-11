@@ -13,7 +13,7 @@ function showCart(event) {
                 table += "<td>" + product.price.toFixed(2) + " zł </td>"
                 table += "<td>" + product.supplierName + "</td>"
                 table += "<td>" + product.amount + "</td>"
-                table += "<td>" + (product.price * product.amount).toFixed(2) + " zł </td>" //TODO
+                table += "<td>" + (product.price * product.amount).toFixed(2) + " zł </td>"
                 table += "<td><input type='number' class='form-control' id='amount' pattern='\d{0,5}' size='3'/></td>"
                 table += "<td style='text-align:center;'><i class='fa fa-trash' " +
                     "style='font-size:24px; cursor:pointer;' " +
@@ -22,9 +22,13 @@ function showCart(event) {
                 table += "</tr>"
                 total += product.price * product.amount;
             }
+
             table += "</table>"
-            table += "<p style='text-align:right;'>"+ "Łączna cena: " + total.toFixed(2) + " zł</p>";
             document.getElementById("cart").innerHTML = table;
+
+            var totalPrice = "<p style='text-align:right;'>" + "Łączna cena: " +
+                total.toFixed(2) + " zł</p>"; // TODO: stara cena musi zrobić out
+            document.getElementById("cart-total").innerHTML = totalPrice;
         },
         error: function () {
             $("#cart-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
@@ -49,9 +53,10 @@ function deleteCart(event, id) { //TODO: method delete is not supported, coś si
         });
     }
 }
-function updateCart(event){
+
+function updateCart(event) {
     var updates = [];
-    $(".form-control").each(function() {
+    $(".form-control").each(function () {
         if ($(this).val() != '') {
             var id = $(this).closest("tr").find("td:first").text();
             var newAmount = $(this).val();
@@ -64,17 +69,18 @@ function updateCart(event){
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(updates),
-            success: function(response) {
+            success: function (response) {
                 showCart(event);
                 $("#cart-result").html("Zaktualizowano koszyk").fadeIn().delay(3000).fadeOut();
             },
-            error: function() {
+            error: function () {
                 $("#cart-result").html("Błąd podczas aktualizowania koszyku")
                     .fadeIn().delay(3000).fadeOut();
             }
         });
     }
 }
+
 function finalize(event) { //TODO
     event.preventDefault();
     var product = {

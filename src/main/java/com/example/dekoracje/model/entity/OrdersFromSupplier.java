@@ -29,7 +29,8 @@ public class OrdersFromSupplier {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "timestamp", nullable = false)
+    @Column(name = "timestamp", nullable = true) //TODO: związane z timestamp w PIOController 91 linijka
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Timestamp timestamp;
 
     @Column(name = "is_delivered", nullable = false)

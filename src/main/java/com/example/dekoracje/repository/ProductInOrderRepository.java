@@ -18,4 +18,9 @@ public interface ProductInOrderRepository extends JpaRepository<ProductInOrder, 
     @Modifying
     @Query(value = "UPDATE ProductInOrder pio SET pio.amount = :amount WHERE pio.id = :id")
     void updateProductInOrder(@Param("id") Long id, @Param("amount") Integer amount);
+
+
+    @Modifying
+    @Query(value = "UPDATE ProductInOrder pio SET pio.product = :#{#productInOrder.product} WHERE pio.id = :#{#productInOrder.id}")
+    void updateProductInOrder(ProductInOrder productInOrder);
 }
