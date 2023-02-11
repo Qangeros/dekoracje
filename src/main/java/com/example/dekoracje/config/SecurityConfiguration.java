@@ -18,15 +18,19 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**")
-                .permitAll()
+//                .requestMatchers("/**")     // sprawdzić czy to działa bo coś gównem zawiewa
+//                .hasRole("ADMIN")                   // to też
+                .requestMatchers("/auth/**", "/contact/**", "/about/**", "/error/**", "/",
+                        "/login/**", "/registration/**", "/images/**", "/scripts/**").permitAll()
+                .requestMatchers("/**").hasRole("ADMIN")
+                .requestMatchers("TODO KURWA").hasRole("CUSTOMER")
+                .requestMatchers("TODO KURWA").hasRole("SUPPLIER")
                 .anyRequest()
                 .authenticated()
                 .and()

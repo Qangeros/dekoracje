@@ -44,20 +44,6 @@ public class InitServiceImpl implements InitService {
     }
 
     @Override
-    public void initUserType() {
-        System.out.println("initUserType");
-        System.out.println("------------");
-        System.out.println();
-
-        List<UserType> userTypes = new ArrayList<>();
-        userTypes.add(new UserType(0L,"admin"));
-
-        userTypes.add(new UserType(0L,"supplier"));
-        userTypes.add(new UserType(0L,"customer"));
-        utr.saveAll(userTypes);
-    }
-
-    @Override
     public void initUsers() {
         System.out.println("initUsers");
         System.out.println("---------");

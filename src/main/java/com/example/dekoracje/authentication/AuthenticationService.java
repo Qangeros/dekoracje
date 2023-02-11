@@ -20,12 +20,28 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        Integer role = request.getRole();
+        UserRole userRole;
+        if(role == 0) {
+            userRole = UserRole.CUSTOMER;
+        } else if(role == 1) {
+            userRole = UserRole.SUPPLIER;
+        } else {
+            throw new IllegalStateException("Role not found");
+        }
         var user = UserTable.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .userRole(UserRole.CUSTOMER) // TODO ręcznie user wybiera przy rejestracji
+                .userRole(userRole)
                 .build();
+        if(userRepository.existsByUsername(request.getUsername())) {
+            throw new IllegalStateException("Username already taken");
+        }
+        if(userRepository.existsByEmail(request.getEmail())) {
+            throw new IllegalStateException("Email already taken");
+        }
+
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()

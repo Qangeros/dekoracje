@@ -1,6 +1,5 @@
 package com.example.dekoracje.model.dto;
 
-import com.example.dekoracje.model.dto.UserTypeDto;
 import com.example.dekoracje.model.entity.UserTable;
 import lombok.Data;
 

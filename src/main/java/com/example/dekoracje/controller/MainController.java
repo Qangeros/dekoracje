@@ -27,4 +27,19 @@ public class MainController {
     public String contact() {
         return "contact";
     }
+
+    @GetMapping("/auth")
+    public String auth() {
+        return "auth";
+    }
+
+    @GetMapping("/error")
+    public String error() {
+        return "error";
+    }
+
+    @GetMapping("/registration")
+    public String showRegisterPage() {
+        return "registration";
+    }
 }

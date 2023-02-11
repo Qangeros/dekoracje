@@ -17,11 +17,11 @@ document.getElementById("submitBtn").addEventListener("click", function () {
                 url: "/registration/add",
                 data: JSON.stringify(formData),
                 dataType: 'json',
-                success: function (result) {
-                    console.log(result);
+                success: function () {
+                    $("#registration-result").html("Konto zostało utworzone").fadeIn().delay(3000).fadeOut();
                 },
-                error: function (error) {
-                    console.log(error);
+                error: function () {
+                    $("#registration-result").html("Wystąpił błąd podczas rejestracji").fadeIn().delay(3000).fadeOut();
                 }
             });
     }
