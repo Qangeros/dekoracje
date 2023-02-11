@@ -82,25 +82,4 @@ public class ProductController {
             return new ResponseEntity<>(error, HttpStatus.CONFLICT);
         }
     }
-//
-//    // TODO: DODAJ METODĘ DO DODAWANIA PRODUKTÓW DO KOSZYKA, check po id czy już jest w koszyku,
-//    //  jeśli tak to zwiększ ilość
-//    @PostMapping("/addtocart")
-//    public ResponseEntity<Product> addProductListToCart(@RequestBody List<ProductDto> productList) {
-//        productList.forEach(product -> {
-//            isProductInCart(product);
-//            Supplier supplier = supplierService.getSupplierById(product.getSupplierId());
-//            Product savedProduct = productService.saveProduct(
-//                    new Product(0L, supplier, product.getName(), product.getPrice(), product.getType()));
-//        });
-//
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
-
-    // TODO: TU DO TESTÓW, ostatecznie koszyk serwis
-//    private boolean isProductInCart(ProductDto dto) {
-//        OrdersFromSupplier item = ordersFromSupplierService.getItemById(dto.getId());
-//        return item != null;
-//    }
-
 }

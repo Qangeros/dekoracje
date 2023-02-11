@@ -28,7 +28,7 @@ public class ProductDto implements Serializable {
         this.type = product.getType();
     }
 
-    public ProductDto(String name, Double price, Long supplierId, String type) {
+    public ProductDto(String name, Double price, Long supplierId, String type) { //TODO: używane?
         this.id = null;
         this.supplierId = supplierId;
         this.supplierName = null;

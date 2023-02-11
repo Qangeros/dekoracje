@@ -128,7 +128,8 @@ function updateStocks() {
                 $("#stock-result").html("Zaktualizowano stany magazynowe").fadeIn().delay(3000).fadeOut();
             },
             error: function() {
-                $("#stock-result").html("Błąd podczas aktualizowania stanu magazynowego").fadeIn().delay(3000).fadeOut();
+                $("#stock-result").html("Błąd podczas aktualizowania stanu magazynowego")
+                    .fadeIn().delay(3000).fadeOut();
             }
         });
     }

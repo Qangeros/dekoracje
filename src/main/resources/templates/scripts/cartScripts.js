@@ -83,27 +83,18 @@ function updateCart(event) {
 
 function finalize(event) { //TODO
     event.preventDefault();
-    var product = {
-        name: document.getElementById("name").value,
-        price: document.getElementById("price").value,
-        supplierId: document.getElementById("supplierId").value,
-        type: document.getElementById("type").value
-    };
-    $.ajax({
-        url: '/product/add',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(product),
-        success: function () {
-            document.getElementById("name").value = "";
-            document.getElementById("price").value = "";
-            document.getElementById("supplierId").value = "";
-            document.getElementById("type").value = "";
-            showAllProducts(event);
-            $("#product-result").html("Dodano produkt").fadeIn().delay(3000).fadeOut();
-        },
-        error: function () {
-            $("#product-result").html("Błąd podczas dodawania produktu").fadeIn().delay(3000).fadeOut();
-        }
-    });
+    if (confirm("Czy na pewno chcesz zakupić produkty?")) {
+        $.ajax({
+            url: '/cart/updateofs',
+            type: 'PUT',
+            contentType: 'application/json',
+            success: function () {
+                showCart(event);
+                $("#cart-result").html("Zakupiono produkty").fadeIn().delay(3000).fadeOut();
+            },
+            error: function () {
+                $("#cart-result").html("Błąd podczas zakupienia koszyka").fadeIn().delay(3000).fadeOut();
+            }
+        });
+    }
 }

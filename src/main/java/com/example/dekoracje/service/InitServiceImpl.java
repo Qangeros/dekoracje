@@ -139,7 +139,7 @@ public class InitServiceImpl implements InitService {
         stocks.add(new Stock(0L, p1.get(), 200));
         stocks.add(new Stock(0L, p2.get(), 150));
         stocks.add(new Stock(0L, p3.get(), 25));
-        stocks.add(new Stock(0L, p4.get(), 2));
+        //stocks.add(new Stock(0L, p4.get(), 2));
 
         str.saveAll(stocks);
     }

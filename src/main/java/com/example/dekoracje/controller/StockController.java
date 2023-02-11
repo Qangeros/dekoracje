@@ -70,7 +70,7 @@ public class StockController {
         }
     }
 
-//    @PutMapping("/update")
+//    @PutMapping("/update") //TODO
 //    public ResponseEntity<ErrorResponse> updateStockAmount(@RequestParam(value="id", required = true) Long id,
 //                                                           @RequestParam(value="amount", required = true) Integer amount) {
 //        try {
