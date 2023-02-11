@@ -3,6 +3,11 @@
 
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"
+            integrity="sha512-DNI/FJdkfyeuPUal7lDkRVg0mFY2n4IZJJYqPbQWLL0COxLi6G6nmf5gr1vW1Bd4wYC09hOvZVsSclfXxUTU/w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
           crossorigin="anonymous" />
@@ -68,9 +73,10 @@
                 <label for="pwd">Hasło:</label>
                 <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd">
             </div>
-            <button type="submit" class="btn btn-default">Zaloguj</button>
+            <button type="submit" class="btn btn-default" id="submitBtn">Zaloguj</button>
         </form>
     </div>
+    <a class="btn btn-primary" th:href="@{/registration}">Utwórz konto</a>
 </div>
 <div id="login-result" class="alert alert-primary text-center"
      role="alert" style="display:none; width:80%; margin: 0 auto;"></div>
