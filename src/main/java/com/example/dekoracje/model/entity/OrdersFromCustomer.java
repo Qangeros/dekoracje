@@ -28,7 +28,7 @@ public class OrdersFromCustomer {
 
     @OneToOne
     @JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "fk_ofc_document"))
-    private Document document; //TODO: możliwe, że do usunięcia
+    private Document document;
 
     @Column(nullable = false)
     private Timestamp timestamp;

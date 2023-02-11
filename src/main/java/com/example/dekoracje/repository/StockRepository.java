@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
     @Query("SELECT s FROM Stock s " +
-            "WHERE s.product.name LIKE '%' || :searchString || '%' ") // TODO sprawdzić czy działa w ten sposób
+            "WHERE s.product.name LIKE '%' || :searchString || '%' ")
     Optional<List<Stock>> findStockBySearch(String searchString);
 
     @Modifying

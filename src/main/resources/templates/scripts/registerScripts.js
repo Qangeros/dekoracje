@@ -6,13 +6,16 @@ document.getElementById("submitBtn").addEventListener("click", function () {
         return;
     }
     if ($("input[name='password']").val() === $("input[name='password1']").val() && $("input[name='password']") != "") {
-        var password = $("input[name='password']").val();
-        var bcrypt = dcodeIO.bcrypt;
-        var salt = bcrypt.genSaltSync(10);
-        var hash = bcrypt.hashSync(password, salt);
+        //TODO: hashowanie po froncie nie działa potem w backu, nie są takie same hasła tworzone przez bcrypt
+
+        // var password = $("input[name='password']").val();
+        // var bcrypt = dcodeIO.bcrypt;
+        // var salt = bcrypt.genSaltSync(10);
+        // var hash = bcrypt.hashSync(password, salt);
             var formData = {
                 username: $("input[name='username']").val(),
-                password: hash,
+                // password: hash,
+                password: $("input[name='password']").val(),
                 email: $("input[name='email']").val(),
                 role: $("input[name='name']:checked").val()
             };

@@ -61,8 +61,8 @@
         <h2 align=center>Formularz logowania</h2>
         <form>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Wpisz adres e-mail" name="email">
+                <label for="username">Nazwa użytkownika:</label>
+                <input type="text" class="form-control" id="username" placeholder="Wpisz nazwę użytkownika" name="username">
             </div>
             <div class="form-group">
                 <label for="pwd">Hasło:</label>
@@ -72,7 +72,9 @@
         </form>
     </div>
 </div>
-
+<div id="login-result" class="alert alert-primary text-center"
+     role="alert" style="display:none; width:80%; margin: 0 auto;"></div>
+<script type="text/javascript" src="../scripts/loginScripts.js"></script>
 </body>
 
 </html>

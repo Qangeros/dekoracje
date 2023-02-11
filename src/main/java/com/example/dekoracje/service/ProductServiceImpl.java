@@ -13,6 +13,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private DataValidatorService dataValidatorService;
+
     @Override
     public List<Product> getAllProductList() {
         return productRepository.findAll();
@@ -30,7 +33,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(Product product) {
-        return productRepository.save(product); // TODO: walidacja na długość nazwy?
+        if (product.getName().length() > 50)
+            throw new IllegalArgumentException("Nazwa produktu nie może być dłuższa niż 50 znaków");
+        return productRepository.save(product); // TODO: po dataValidatorService powinno być
     }
 
     @Override

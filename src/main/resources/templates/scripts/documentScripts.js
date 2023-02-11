@@ -114,5 +114,3 @@ function showForm(event){
     document.getElementById("form-container").style.display =
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";
 }
-
-//TODO: generowanie automatyczne przy dodawaniu produktów do stocku

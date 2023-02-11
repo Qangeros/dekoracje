@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     private DataValidatorService dataValidatorService;
 
     @Override
-    public List<Customer> getAllCustomerList() { // SPRAWDZANIE DODANEGO ADRESU
+    public List<Customer> getAllCustomerList() {
         List<Customer> customers = customerRepository.findAll();
         for (Customer customer : customers) {
             customer.setAddress(addressRepository.findById(customer.getAddress().getId()).orElseThrow());
@@ -41,8 +41,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer saveCustomer(Customer customer) {
+        if(!dataValidatorService.isEmailValid(customer.getEmail()))
+            throw new IllegalArgumentException("Niepoprawny adres email");
+        if(!dataValidatorService.isPhoneValid(customer.getPhone()))
+            throw new IllegalArgumentException("Niepoprawny numer telefonu");
         return customerRepository.save(customer);
-    } // TODO: walidacja maila, telefonu, nipu
+    } // TODO: walidacja nipu, sprawdzenie tych dwóch metod
 
     @Override
     public void deleteCustomerById(Long id) {

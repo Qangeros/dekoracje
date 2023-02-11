@@ -24,12 +24,12 @@ public class OrdersFromSupplier {
 
     @OneToOne
     @JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "fk_ofs_document"))
-    private Document document; //TODO: możliwe, że do usunięcia lub null i dodane potem
+    private Document document;
 
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "timestamp", nullable = true) //TODO: związane z timestamp w PIOController 91 linijka
+    @Column(name = "timestamp", nullable = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Timestamp timestamp;
 

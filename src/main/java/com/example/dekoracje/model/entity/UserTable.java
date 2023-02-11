@@ -32,10 +32,6 @@ public class UserTable implements UserDetails {
     @Column(nullable = false)
     private String email;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_type_id", foreignKey = @ForeignKey(name = "fk_user_usertype"))
-//    private UserType userType; //TODO: raczej do wywalenia, wstawiony enum
-
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 

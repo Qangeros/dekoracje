@@ -1,5 +1,7 @@
 package com.example.dekoracje.config;
 
+import com.example.dekoracje.model.entity.UserRole;
+import com.example.dekoracje.model.entity.UserTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,8 +31,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/auth/**", "/contact/**", "/about/**", "/error/**", "/",
                         "/login/**", "/registration/**", "/images/**", "/scripts/**").permitAll()
                 .requestMatchers("/**").hasRole("ADMIN")
-                .requestMatchers("TODO KURWA").hasRole("CUSTOMER")
-                .requestMatchers("TODO KURWA").hasRole("SUPPLIER")
+                .requestMatchers("/**").hasRole("CUSTOMER")
+                .requestMatchers("/customer/**").hasRole("SUPPLIER")
                 .anyRequest()
                 .authenticated()
                 .and()

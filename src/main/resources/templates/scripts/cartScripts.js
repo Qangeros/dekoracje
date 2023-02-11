@@ -27,7 +27,7 @@ function showCart(event) {
             document.getElementById("cart").innerHTML = table;
 
             var totalPrice = "<p style='text-align:right;'>" + "Łączna cena: " +
-                total.toFixed(2) + " zł</p>"; // TODO: stara cena musi zrobić out
+                total.toFixed(2) + " zł</p>";
             document.getElementById("cart-total").innerHTML = totalPrice;
         },
         error: function () {
@@ -36,7 +36,7 @@ function showCart(event) {
     });
 }
 
-function deleteCart(event, id) { //TODO: method delete is not supported, coś się rypło
+function deleteCart(event, id) {
     event.preventDefault();
     if (confirm("Czy na pewno chcesz usunąć produkt z koszyka?")) {
         $.ajax({
@@ -81,7 +81,7 @@ function updateCart(event) {
     }
 }
 
-function finalize(event) { //TODO
+function finalize(event) {
     event.preventDefault();
     if (confirm("Czy na pewno chcesz zakupić produkty?")) {
         $.ajax({

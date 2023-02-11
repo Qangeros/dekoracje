@@ -112,7 +112,7 @@ public class ProductInOrderController {
                     stockService.saveStock(new Stock(0L, s.getProduct(), s.getAmount()));
                 }
             });
-            return new ResponseEntity<>(HttpStatus.OK); // TODO: update i insert stocku
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             ErrorResponse error = new ErrorResponse("Wystąpił błąd podczas aktualizacji stanu magazynowego.");
             return new ResponseEntity<>(error, HttpStatus.CONFLICT);
