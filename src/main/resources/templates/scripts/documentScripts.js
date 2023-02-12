@@ -1,9 +1,13 @@
+var token = localStorage.getItem("token");
 function getDocument(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
     $.ajax({
         url: '/document/getbystring',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         data: { searchString: searchString },
         success: function(response) {
             var table = "<table border='1'>"
@@ -36,6 +40,9 @@ function showAllDocuments(event) {
     $.ajax({
         url: '/document/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             var table = "<table border='1'>"
                 for (var i = 0; i < response.length; i++) {
@@ -63,6 +70,9 @@ function deleteDocument(event, id){
         $.ajax({
             url: '/document/deletebyid',
             type: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             data: { id: id },
             success: function() {
                 showAllDocuments(event);
@@ -87,6 +97,9 @@ function addDocument(event) {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(doc),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function() {
             document.getElementById("name").value = "";
             document.getElementById("date").value = "";

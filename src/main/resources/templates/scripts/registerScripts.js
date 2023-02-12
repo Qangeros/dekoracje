@@ -26,7 +26,11 @@ document.getElementById("submitBtn").addEventListener("click", function () {
                 data: JSON.stringify(formData),
                 dataType: 'json',
                 success: function () {
-                    $("#registration-result").html("Konto zostało utworzone").fadeIn().delay(3000).fadeOut();
+                    $("#registration-result").html("Konto zostało utworzone." +
+                        " Zostaniesz przekierowany na stronę logowania").fadeIn().delay(3000).fadeOut();
+                    setTimeout(function () {
+                        window.location.href = "/login";
+                    }, 1500);
                 },
                 error: function () {
                     $("#registration-result").html("Wystąpił błąd podczas rejestracji").fadeIn().delay(3000).fadeOut();

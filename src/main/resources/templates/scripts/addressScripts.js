@@ -1,3 +1,4 @@
+var token = localStorage.getItem("token");
 function getAddress(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
@@ -5,6 +6,9 @@ function getAddress(event) {
         url: '/address/getbystring',
         type: 'GET',
         data: { searchString: searchString },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             var table = "<table border='1'>"
             if (response.length > 0) {
@@ -35,6 +39,9 @@ function showAllAddresses(event) {
     $.ajax({
         url: '/address/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             var table = "<table border='1'>"
                 for (var i = 0; i < response.length; i++) {
@@ -86,6 +93,9 @@ function addAddress(event) {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(address),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function() {
             document.getElementById("street").value = "";
             document.getElementById("city").value = "";

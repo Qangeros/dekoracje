@@ -1,8 +1,12 @@
+var token = localStorage.getItem("token");
 function showCart(event) {
     event.preventDefault();
     $.ajax({
         url: '/cart/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function (response) {
             var table = "<table border='1'>"
             var total = 0;
@@ -43,6 +47,9 @@ function deleteCart(event, id) {
             url: '/cart/deletebyid',
             type: 'DELETE',
             data: {id: id},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function () {
                 showCart(event);
                 $("#cart-result").html("Usunięto produkt z koszyka").fadeIn().delay(3000).fadeOut();
@@ -69,6 +76,9 @@ function updateCart(event) {
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(updates),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function (response) {
                 showCart(event);
                 $("#cart-result").html("Zaktualizowano koszyk").fadeIn().delay(3000).fadeOut();
@@ -88,6 +98,9 @@ function finalize(event) {
             url: '/cart/updateofs',
             type: 'PUT',
             contentType: 'application/json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function () {
                 showCart(event);
                 $("#cart-result").html("Zakupiono produkty").fadeIn().delay(3000).fadeOut();

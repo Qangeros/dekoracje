@@ -19,7 +19,8 @@ document.getElementById("submitBtn").addEventListener("click", function () {
             url: "/registration/authenticate",
             data: JSON.stringify(formData),
             dataType: 'json',
-            success: function () {
+            success: function (data) {
+                localStorage.setItem("token", data.token);
                 $("#login-result").html("Zalogowano").fadeIn().delay(3000).fadeOut();
             },
             error: function () {

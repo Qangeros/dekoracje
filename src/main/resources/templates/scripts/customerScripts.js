@@ -1,9 +1,13 @@
+var token = localStorage.getItem("token");
 function getCustomer(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
     $.ajax({
         url: '/customer/getbystring',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         data: { searchString: searchString },
         success: function(response) {
             var table = "<table border='1'>"
@@ -34,9 +38,13 @@ function getCustomer(event) {
 
 function showAllCustomers(event) {
     event.preventDefault();
+    console.log(token);
     $.ajax({
         url: '/customer/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             var table = "<table border='1'>"
                 for (var i = 0; i < response.length; i++) {
@@ -65,6 +73,9 @@ function deleteCustomer(event, id){
         $.ajax({
             url: '/customer/deletebyid',
             type: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             data: { id: id },
             success: function() {
                 showAllCustomers(event);

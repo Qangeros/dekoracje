@@ -1,3 +1,4 @@
+var token = localStorage.getItem("token");
 function getStock(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
@@ -5,6 +6,9 @@ function getStock(event) {
         url: '/stock/getbystring',
         type: 'GET',
         data: { searchString: searchString },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             response.sort((a, b) => (a.id > b.id) ? 1 : -1);
             var table = "<table border='1'>"
@@ -36,6 +40,9 @@ function showAllStocks(event) {
     $.ajax({
         url: '/stock/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             response.sort((a, b) => (a.id > b.id) ? 1 : -1);
             var table = "<table border='1'>"
@@ -65,6 +72,9 @@ function deleteStock(event, id){
             url: '/stock/deletebyid',
             type: 'DELETE',
             data: { id: id },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function() {
                 showAllStocks(event);
                 $("#stock-result").html("Usunięto stan magazynowy").fadeIn().delay(3000).fadeOut();
@@ -86,6 +96,9 @@ function addStock(event) {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(stock),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function() {
             document.getElementById("productName").value = "";
             document.getElementById("amount").value = "";
@@ -123,6 +136,9 @@ function updateStocks() {
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(updates),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function(response) {
                 showAllStocks(event);
                 $("#stock-result").html("Zaktualizowano stany magazynowe").fadeIn().delay(3000).fadeOut();

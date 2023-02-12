@@ -1,9 +1,13 @@
+var token = localStorage.getItem("token");
 function getProduct(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
     $.ajax({
         url: '/product/getbystring',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         data: {searchString: searchString},
         success: function (response) {
             var table = "<table border='1'>"
@@ -39,6 +43,9 @@ function showAllProducts(event) {
     $.ajax({
         url: '/product/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function (response) {
             var table = "<table border='1'>"
             for (var i = 0; i < response.length; i++) {
@@ -71,6 +78,9 @@ function deleteProduct(event, id) {
             url: '/product/deletebyid',
             type: 'DELETE',
             data: {id: id},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function () {
                 showAllProducts(event);
                 $("#product-result").html("Usunięto produkt").fadeIn().delay(3000).fadeOut();
@@ -95,6 +105,9 @@ function addProduct(event) {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(product),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function () {
             document.getElementById("name").value = "";
             document.getElementById("price").value = "";
@@ -130,6 +143,9 @@ function formAddSuppliers(event) {
     $.ajax({
         url: '/supplier/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function (response) {
             for (var i = 0; i < response.length; i++) {
                 var supplier = response[i];
@@ -151,6 +167,9 @@ function addToCart(event, id) {
         url: '/cart/add',
         type: 'POST',
         data: {id: id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function () {
             showAllProducts(event);
             $("#product-result").html("Dodano produkt do koszyka").fadeIn().delay(3000).fadeOut();

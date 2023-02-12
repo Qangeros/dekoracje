@@ -1,3 +1,4 @@
+var token = localStorage.getItem("token");
 function getSupplier(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
@@ -5,6 +6,9 @@ function getSupplier(event) {
         url: '/supplier/getbystring',
         type: 'GET',
         data: { searchString: searchString },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             var table = "<table border='1'>"
             if (response.length > 0) {
@@ -36,6 +40,9 @@ function showAllSuppliers(event) {
     $.ajax({
         url: '/supplier/getall',
         type: 'GET',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
         success: function(response) {
             var table = "<table border='1'>"
                 for (var i = 0; i < response.length; i++) {
@@ -65,6 +72,9 @@ function deleteSupplier(event, id){
             url: '/supplier/deletebyid',
             type: 'DELETE',
             data: { id: id },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function() {
                 showAllSuppliers(event);
                 $("#supplier-result").html("Usunięto dostawcę").fadeIn().delay(3000).fadeOut();
