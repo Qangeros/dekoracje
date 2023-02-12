@@ -1,4 +1,5 @@
 var token = localStorage.getItem("token");
+
 function getProduct(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;

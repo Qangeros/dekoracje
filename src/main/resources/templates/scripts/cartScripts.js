@@ -1,4 +1,5 @@
 var token = localStorage.getItem("token");
+
 function showCart(event) {
     event.preventDefault();
     $.ajax({

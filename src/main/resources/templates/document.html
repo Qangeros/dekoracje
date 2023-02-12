@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-        crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-          integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-          crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-          crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <title>Dokumenty</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Dokumenty</title>
 </head>
 <body onload="showAllDocuments(event);">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -57,73 +57,76 @@
   </div>
 </nav>
 <div class="header bg-light py-3">
-  <div class="container">
-    <h1 class="text-center font-weight-bold">Dokumenty</h1>
-  </div>
+    <div class="container">
+        <h1 class="text-center font-weight-bold">Dokumenty</h1>
+    </div>
 </div>
 <div class="container my-5">
-  <div class="row">
-    <div class="col-12">
-      <form onsubmit="handleFormSubmit(event)">
-        <div class="form-group">
-          <button type="button" class="btn btn-info mr-3" id="showAllDocumentButton"
-                  onclick="showAllDocuments(event)" >Wyświetl wszystkie</button>
-          <div class="d-inline-block mr-3" style="width: calc(100% - 300px);">
-            <input type="text" class="form-control" id="id" placeholder="Wyszukaj..." />
-          </div>
-          <button type="submit" class="btn btn-primary" id="getDocumentButton">Wyszukaj</button>
+    <div class="row">
+        <div class="col-12">
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <button type="button" class="btn btn-info mr-3" id="showAllDocumentButton"
+                            onclick="showAllDocuments(event)">Wyświetl wszystkie
+                    </button>
+                    <div class="d-inline-block mr-3" style="width: calc(100% - 300px);">
+                        <input type="text" class="form-control" id="id" placeholder="Wyszukaj..."/>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="getDocumentButton">Wyszukaj</button>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered mx-auto">
-        <thead>
-        <tr>
-          <th scope="col">Nazwa</th>
-          <th scope="col">Data</th>
-          <th scope="col">Kwota</th>
-          <th scope="col">Dokument zakupowy?</th>
-        </tr>
-        </thead>
-        <tbody id="documents">
-        </tbody>
-      </table>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered mx-auto">
+                <thead>
+                <tr>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Kwota</th>
+                    <th scope="col">Dokument zakupowy?</th>
+                </tr>
+                </thead>
+                <tbody id="documents">
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
 <div id="document-result" class="alert alert-primary text-center"
      role="alert" style="display:none; width:80%; margin: 0 auto;"></div>
 
 <div class="text-center">
-  <button class="btn btn-info mr-3" id="add-button" onclick="showForm(event)" style="width: 20%;">Dodaj dokument</button>
+    <button class="btn btn-info mr-3" id="add-button" onclick="showForm(event)" style="width: 20%;">Dodaj dokument
+    </button>
 </div>
 <div id="form-container" class="row justify-content-center" style="display: none;">
-  <form id="add-form">
-    <h3 class="text-center">Nowy dokument</h3>
-    <div class="form-group">
-      <label for="name">Nazwa:</label>
-      <input type="text" id="name" name="name" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="date">Data:</label>
-      <input type="date" id="date" name="date" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="price">Kwota:</label>
-      <input type="text" id="price" name="price" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="isPurchase">Dokument zakupowy:</label>
-      <input type="checkbox" id="isPurchase" name="isPurchase" class="form-control">
-    </div>
-    <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary" id="addDocumentButton"
-              onclick="addDocument(event)">Dodaj</button>
-    </div>
-  </form>
+    <form id="add-form">
+        <h3 class="text-center">Nowy dokument</h3>
+        <div class="form-group">
+            <label for="name">Nazwa:</label>
+            <input type="text" id="name" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="date">Data:</label>
+            <input type="date" id="date" name="date" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="price">Kwota:</label>
+            <input type="text" id="price" name="price" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="isPurchase">Dokument zakupowy:</label>
+            <input type="checkbox" id="isPurchase" name="isPurchase" class="form-control">
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary" id="addDocumentButton"
+                    onclick="addDocument(event)">Dodaj
+            </button>
+        </div>
+    </form>
 </div>
 <script type="text/javascript" src="../scripts/documentScripts.js"></script>
 </body>

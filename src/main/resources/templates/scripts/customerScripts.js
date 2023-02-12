@@ -1,4 +1,5 @@
 var token = localStorage.getItem("token");
+
 function getCustomer(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
@@ -8,8 +9,8 @@ function getCustomer(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        data: { searchString: searchString },
-        success: function(response) {
+        data: {searchString: searchString},
+        success: function (response) {
             var table = "<table border='1'>"
             if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
@@ -30,7 +31,7 @@ function getCustomer(event) {
                 $("#address-result").html("Nie znaleziono klienta").fadeIn().delay(3000).fadeOut()
             }
         },
-        error: function() {
+        error: function () {
             $("#customer-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
@@ -45,29 +46,30 @@ function showAllCustomers(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function(response) {
+        success: function (response) {
             var table = "<table border='1'>"
-                for (var i = 0; i < response.length; i++) {
-                    var customer = response[i];
-                    table += "<tr><td>" + customer.name + "</td>"
-                    table += "<td>" + customer.surname + "</td>"
-                    table += "<td>" + customer.email + "</td>"
-                    table += "<td>" + customer.phone + "</td>"
-                    table += "<td>" + customer.address + "</td>"
-                    table += "<td style='text-align:center;'><i class='fa fa-trash' " +
-                        "style='font-size:24px; cursor:pointer;' " +
-                        "onclick='deleteCustomer(event, " + customer.id + ")'></i></td>"
-                    table += "</tr>"
-                }
-                table += "</table>"
-                document.getElementById("customers").innerHTML = table;
+            for (var i = 0; i < response.length; i++) {
+                var customer = response[i];
+                table += "<tr><td>" + customer.name + "</td>"
+                table += "<td>" + customer.surname + "</td>"
+                table += "<td>" + customer.email + "</td>"
+                table += "<td>" + customer.phone + "</td>"
+                table += "<td>" + customer.address + "</td>"
+                table += "<td style='text-align:center;'><i class='fa fa-trash' " +
+                    "style='font-size:24px; cursor:pointer;' " +
+                    "onclick='deleteCustomer(event, " + customer.id + ")'></i></td>"
+                table += "</tr>"
+            }
+            table += "</table>"
+            document.getElementById("customers").innerHTML = table;
         },
-        error: function() {
+        error: function () {
             $("#customers-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
 }
-function deleteCustomer(event, id){
+
+function deleteCustomer(event, id) {
     event.preventDefault();
     if (confirm("Czy na pewno chcesz usunąć klienta?")) {
         $.ajax({
@@ -76,17 +78,18 @@ function deleteCustomer(event, id){
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
-            data: { id: id },
-            success: function() {
+            data: {id: id},
+            success: function () {
                 showAllCustomers(event);
                 $("#customer-result").html("Usunięto klienta").fadeIn().delay(3000).fadeOut();
             },
-            error: function(jqXHR) {
+            error: function (jqXHR) {
                 $("#customer-result").html(jqXHR.responseJSON.message).fadeIn().delay(3000).fadeOut();
             }
         });
     }
 }
+
 function handleFormSubmit(event) {
     event.preventDefault();
     var idInput = document.getElementById("id");
@@ -96,7 +99,8 @@ function handleFormSubmit(event) {
         getCustomer(event);
     }
 }
-function showForm(event){
+
+function showForm(event) {
     event.preventDefault();
     document.getElementById("form-container").style.display =
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";

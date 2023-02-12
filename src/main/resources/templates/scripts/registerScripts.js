@@ -12,30 +12,30 @@ document.getElementById("submitBtn").addEventListener("click", function () {
         // var bcrypt = dcodeIO.bcrypt;
         // var salt = bcrypt.genSaltSync(10);
         // var hash = bcrypt.hashSync(password, salt);
-            var formData = {
-                username: $("input[name='username']").val(),
-                // password: hash,
-                password: $("input[name='password']").val(),
-                email: $("input[name='email']").val(),
-                role: $("input[name='name']:checked").val()
-            };
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/registration/add",
-                data: JSON.stringify(formData),
-                dataType: 'json',
-                success: function () {
-                    $("#registration-result").html("Konto zostało utworzone." +
-                        " Zostaniesz przekierowany na stronę logowania").fadeIn().delay(3000).fadeOut();
-                    setTimeout(function () {
-                        window.location.href = "/login";
-                    }, 1500);
-                },
-                error: function () {
-                    $("#registration-result").html("Wystąpił błąd podczas rejestracji").fadeIn().delay(3000).fadeOut();
-                }
-            });
+        var formData = {
+            username: $("input[name='username']").val(),
+            // password: hash,
+            password: $("input[name='password']").val(),
+            email: $("input[name='email']").val(),
+            role: $("input[name='name']:checked").val()
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/registration/add",
+            data: JSON.stringify(formData),
+            dataType: 'json',
+            success: function () {
+                $("#registration-result").html("Konto zostało utworzone." +
+                    " Zostaniesz przekierowany na stronę logowania").fadeIn().delay(3000).fadeOut();
+                setTimeout(function () {
+                    window.location.href = "/login";
+                }, 1500);
+            },
+            error: function () {
+                $("#registration-result").html("Wystąpił błąd podczas rejestracji").fadeIn().delay(3000).fadeOut();
+            }
+        });
     } else {
         $("#registration-result").html("Hasła nie zgadzają się!").fadeIn().delay(3000).fadeOut();
     }

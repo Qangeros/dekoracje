@@ -1,15 +1,16 @@
 var token = localStorage.getItem("token");
+
 function getAddress(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
     $.ajax({
         url: '/address/getbystring',
         type: 'GET',
-        data: { searchString: searchString },
+        data: {searchString: searchString},
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function(response) {
+        success: function (response) {
             var table = "<table border='1'>"
             if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
@@ -29,11 +30,12 @@ function getAddress(event) {
                 $("#address-result").html("Nie znaleziono adresu").fadeIn().delay(3000).fadeOut()
             }
         },
-        error: function() {
+        error: function () {
             $("#address-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
 }
+
 function showAllAddresses(event) {
     event.preventDefault();
     $.ajax({
@@ -42,44 +44,46 @@ function showAllAddresses(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function(response) {
+        success: function (response) {
             var table = "<table border='1'>"
-                for (var i = 0; i < response.length; i++) {
-                    var address = response[i];
-                    table += "<tr><td>" + address.street + "</td>"
-                    table += "<td>" + address.city + "</td>"
-                    table += "<td>" + address.postalCode + "</td>"
-                    table += "<td>" + address.isWorkplace + "</td>"
-                    table += "<td style='text-align:center;'><i class='fa fa-trash' " +
-                        "style='font-size:24px; cursor:pointer;' " +
-                        "onclick='deleteAddress(event, " + address.id + ")'></i></td>"
-                    table += "</tr>"
-                }
-                table += "</table>"
-                document.getElementById("addresses").innerHTML = table;
+            for (var i = 0; i < response.length; i++) {
+                var address = response[i];
+                table += "<tr><td>" + address.street + "</td>"
+                table += "<td>" + address.city + "</td>"
+                table += "<td>" + address.postalCode + "</td>"
+                table += "<td>" + address.isWorkplace + "</td>"
+                table += "<td style='text-align:center;'><i class='fa fa-trash' " +
+                    "style='font-size:24px; cursor:pointer;' " +
+                    "onclick='deleteAddress(event, " + address.id + ")'></i></td>"
+                table += "</tr>"
+            }
+            table += "</table>"
+            document.getElementById("addresses").innerHTML = table;
         },
-        error: function() {
+        error: function () {
             $("#address-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
 }
-function deleteAddress(event, id){
+
+function deleteAddress(event, id) {
     event.preventDefault();
     if (confirm("Czy na pewno chcesz usunąć adres?")) {
         $.ajax({
             url: '/address/deletebyid',
             type: 'DELETE',
-            data: { id: id },
-            success: function() {
+            data: {id: id},
+            success: function () {
                 showAllAddresses(event);
                 $("#address-result").html("Usunięto adres").fadeIn().delay(3000).fadeOut();
             },
-            error: function(jqXHR) {
+            error: function (jqXHR) {
                 $("#address-result").html(jqXHR.responseJSON.message).fadeIn().delay(3000).fadeOut();
             }
         });
     }
 }
+
 function addAddress(event) {
     event.preventDefault();
     var address = {
@@ -96,7 +100,7 @@ function addAddress(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function() {
+        success: function () {
             document.getElementById("street").value = "";
             document.getElementById("city").value = "";
             document.getElementById("postalCode").value = "";
@@ -104,11 +108,12 @@ function addAddress(event) {
             showAllAddresses(event);
             $("#address-result").html("Dodano adres").fadeIn().delay(3000).fadeOut();
         },
-        error: function() {
+        error: function () {
             $("#address-result").html("Błąd podczas dodawania adresu").fadeIn().delay(3000).fadeOut();
         }
     });
 }
+
 function handleFormSubmit(event) {
     event.preventDefault();
     var idInput = document.getElementById("id");
@@ -118,7 +123,8 @@ function handleFormSubmit(event) {
         getAddress(event);
     }
 }
-function showForm(event){
+
+function showForm(event) {
     event.preventDefault();
     document.getElementById("form-container").style.display =
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";

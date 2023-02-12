@@ -1,4 +1,5 @@
 var token = localStorage.getItem("token");
+
 function getDocument(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
@@ -8,8 +9,8 @@ function getDocument(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        data: { searchString: searchString },
-        success: function(response) {
+        data: {searchString: searchString},
+        success: function (response) {
             var table = "<table border='1'>"
             if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
@@ -30,11 +31,12 @@ function getDocument(event) {
             }
 
         },
-        error: function() {
+        error: function () {
             $("#document-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
 }
+
 function showAllDocuments(event) {
     event.preventDefault();
     $.ajax({
@@ -43,28 +45,29 @@ function showAllDocuments(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function(response) {
+        success: function (response) {
             var table = "<table border='1'>"
-                for (var i = 0; i < response.length; i++) {
-                    var document = response[i];
-                    table += "<tr><td>" + document.name + "</td>"
-                    table += "<td>" + document.date + "</td>"
-                    table += "<td>" + document.price + "</td>"
-                    table += "<td>" + document.isPurchase + "</td>"
-                    table += "<td style='text-align:center;'><i class='fa fa-trash' " +
-                        "style='font-size:24px; cursor:pointer;' " +
-                        "onclick='deleteDocument(event, " + document.id + ")'></i></td>"
-                    table += "</tr>"
-                }
-                table += "</table>"
-                document.getElementById("documents").innerHTML = table;
+            for (var i = 0; i < response.length; i++) {
+                var document = response[i];
+                table += "<tr><td>" + document.name + "</td>"
+                table += "<td>" + document.date + "</td>"
+                table += "<td>" + document.price + "</td>"
+                table += "<td>" + document.isPurchase + "</td>"
+                table += "<td style='text-align:center;'><i class='fa fa-trash' " +
+                    "style='font-size:24px; cursor:pointer;' " +
+                    "onclick='deleteDocument(event, " + document.id + ")'></i></td>"
+                table += "</tr>"
+            }
+            table += "</table>"
+            document.getElementById("documents").innerHTML = table;
         },
-        error: function() {
+        error: function () {
             $("#documents-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
 }
-function deleteDocument(event, id){
+
+function deleteDocument(event, id) {
     event.preventDefault();
     if (confirm("Czy na pewno chcesz usunąć dokument?")) {
         $.ajax({
@@ -73,17 +76,18 @@ function deleteDocument(event, id){
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
-            data: { id: id },
-            success: function() {
+            data: {id: id},
+            success: function () {
                 showAllDocuments(event);
                 $("#document-result").html("Usunięto dokument").fadeIn().delay(3000).fadeOut();
             },
-            error: function(jqXHR) {
+            error: function (jqXHR) {
                 $("#document-result").html(jqXHR.responseJSON.message).fadeIn().delay(3000).fadeOut();
             }
         });
     }
 }
+
 function addDocument(event) {
     event.preventDefault();
     var doc = {
@@ -100,7 +104,7 @@ function addDocument(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function() {
+        success: function () {
             document.getElementById("name").value = "";
             document.getElementById("date").value = "";
             document.getElementById("price").value = "";
@@ -108,11 +112,12 @@ function addDocument(event) {
             showAllDocuments(event);
             $("#document-result").html("Dodano dokument").fadeIn().delay(3000).fadeOut();
         },
-        error: function() {
+        error: function () {
             $("#document-result").html("Błąd podczas dodawania dokumentu").fadeIn().delay(3000).fadeOut();
         }
     });
 }
+
 function handleFormSubmit(event) {
     event.preventDefault();
     var idInput = document.getElementById("id");
@@ -122,7 +127,8 @@ function handleFormSubmit(event) {
         getDocument(event);
     }
 }
-function showForm(event){
+
+function showForm(event) {
     event.preventDefault();
     document.getElementById("form-container").style.display =
         (document.getElementById("form-container").style.display === "none") ? "grid" : "none";

@@ -1,15 +1,16 @@
 var token = localStorage.getItem("token");
+
 function getStock(event) {
     event.preventDefault();
     var searchString = document.getElementById("id").value;
     $.ajax({
         url: '/stock/getbystring',
         type: 'GET',
-        data: { searchString: searchString },
+        data: {searchString: searchString},
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function(response) {
+        success: function (response) {
             response.sort((a, b) => (a.id > b.id) ? 1 : -1);
             var table = "<table border='1'>"
             if (response.length > 0) {
@@ -30,11 +31,12 @@ function getStock(event) {
                 $("#stock-result").html("Nie znaleziono stanu magazynowego").fadeIn().delay(3000).fadeOut()
             }
         },
-        error: function() {
+        error: function () {
             $("#stock-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
 }
+
 function showAllStocks(event) {
     event.preventDefault();
     $.ajax({
@@ -43,48 +45,50 @@ function showAllStocks(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function(response) {
+        success: function (response) {
             response.sort((a, b) => (a.id > b.id) ? 1 : -1);
             var table = "<table border='1'>"
-                for (var i = 0; i < response.length; i++) {
-                    var stock = response[i];
-                    table += "<tr><td>" + stock.id + "</td>"
-                    table += "<td>" + stock.productName + "</td>"
-                    table += "<td>" + stock.amount + "</td>"
-                    table += "<td><input type='number' class='form-control' id='new-amount' pattern='\d{0,5}' size='3'/></td>"
-                    table += "<td style='text-align:center;'><i class='fa fa-trash' " +
-                        "style='font-size:24px; cursor:pointer;' " +
-                        "onclick='deleteStock(event, " + stock.id + ")'></i></td>"
-                    table += "</tr>"
-                }
-                table += "</table>"
-                document.getElementById("stocks").innerHTML = table;
+            for (var i = 0; i < response.length; i++) {
+                var stock = response[i];
+                table += "<tr><td>" + stock.id + "</td>"
+                table += "<td>" + stock.productName + "</td>"
+                table += "<td>" + stock.amount + "</td>"
+                table += "<td><input type='number' class='form-control' id='new-amount' pattern='\d{0,5}' size='3'/></td>"
+                table += "<td style='text-align:center;'><i class='fa fa-trash' " +
+                    "style='font-size:24px; cursor:pointer;' " +
+                    "onclick='deleteStock(event, " + stock.id + ")'></i></td>"
+                table += "</tr>"
+            }
+            table += "</table>"
+            document.getElementById("stocks").innerHTML = table;
         },
-        error: function() {
+        error: function () {
             $("#stock-result").html("Wystąpił błąd").fadeIn().delay(3000).fadeOut();
         }
     });
 }
-function deleteStock(event, id){
+
+function deleteStock(event, id) {
     event.preventDefault();
     if (confirm("Czy na pewno chcesz usunąć adres?")) {
         $.ajax({
             url: '/stock/deletebyid',
             type: 'DELETE',
-            data: { id: id },
+            data: {id: id},
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
-            success: function() {
+            success: function () {
                 showAllStocks(event);
                 $("#stock-result").html("Usunięto stan magazynowy").fadeIn().delay(3000).fadeOut();
             },
-            error: function(jqXHR) {
+            error: function (jqXHR) {
                 $("#stock-result").html(jqXHR.responseJSON.message).fadeIn().delay(3000).fadeOut();
             }
         });
     }
 }
+
 function addStock(event) {
     event.preventDefault();
     var stock = {
@@ -99,17 +103,18 @@ function addStock(event) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        success: function() {
+        success: function () {
             document.getElementById("productName").value = "";
             document.getElementById("amount").value = "";
             showAllStocks(event);
             $("#stock-result").html("Dodano stan magazynowy").fadeIn().delay(3000).fadeOut();
         },
-        error: function() {
+        error: function () {
             $("#stock-result").html("Błąd podczas dodawania stanu magazynowego").fadeIn().delay(3000).fadeOut();
         }
     });
 }
+
 function handleFormSubmit(event) {
     event.preventDefault();
     var idInput = document.getElementById("id");
@@ -122,7 +127,7 @@ function handleFormSubmit(event) {
 
 function updateStocks() {
     var updates = [];
-    $(".form-control").each(function() {
+    $(".form-control").each(function () {
         if ($(this).val() != '') {
             var id = $(this).closest("tr").find("td:first").text();
             var newAmount = $(this).val();
@@ -139,11 +144,11 @@ function updateStocks() {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
             },
-            success: function(response) {
+            success: function (response) {
                 showAllStocks(event);
                 $("#stock-result").html("Zaktualizowano stany magazynowe").fadeIn().delay(3000).fadeOut();
             },
-            error: function() {
+            error: function () {
                 $("#stock-result").html("Błąd podczas aktualizowania stanu magazynowego")
                     .fadeIn().delay(3000).fadeOut();
             }

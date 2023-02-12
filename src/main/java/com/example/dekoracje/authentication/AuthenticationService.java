@@ -22,9 +22,9 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         Integer role = request.getRole();
         UserRole userRole;
-        if(role == 0) {
+        if (role == 0) {
             userRole = UserRole.CUSTOMER;
-        } else if(role == 1) {
+        } else if (role == 1) {
             userRole = UserRole.SUPPLIER;
         } else {
             throw new IllegalStateException("Role not found");
@@ -35,10 +35,10 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .userRole(userRole)
                 .build();
-        if(userRepository.existsByUsername(request.getUsername())) {
+        if (userRepository.existsByUsername(request.getUsername())) {
             throw new IllegalStateException("Username already taken");
         }
-        if(userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalStateException("Email already taken");
         }
 
