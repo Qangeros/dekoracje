@@ -31,7 +31,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">Strona główna<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/index}">Strona główna<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/about}">O nas</a>
@@ -73,10 +73,12 @@
                 <label for="pwd">Hasło:</label>
                 <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd">
             </div>
-            <button type="submit" class="btn btn-default" id="submitBtn">Zaloguj</button>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" id="submitBtn">Zaloguj</button>
+                <a class="btn btn-default" th:href="@{/registration}">Nie masz konta? Zarejestruj się!</a>
+            </div>
         </form>
     </div>
-    <a class="btn btn-primary" th:href="@{/registration}">Utwórz konto</a>
 </div>
 <div id="login-result" class="alert alert-primary text-center"
      role="alert" style="display:none; width:80%; margin: 0 auto;"></div>
