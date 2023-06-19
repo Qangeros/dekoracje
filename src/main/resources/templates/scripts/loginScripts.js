@@ -3,7 +3,7 @@ document.getElementById("submitBtn").addEventListener("click", function () {
     if (!$("input[name='username']").val() || !$("input[name='pwd']").val()) {
         $("#login-result").html("Uzupełnij wszystkie pola").fadeIn().delay(3000).fadeOut();
         return;
-    } //TODO: hashowanie po froncie nie działa potem w backu, nie są takie same hasła tworzone przez bcrypt
+    }
     // var password = $("input[name='pwd']").val();
     // var bcrypt = dcodeIO.bcrypt;
     // var salt = bcrypt.genSaltSync(10);

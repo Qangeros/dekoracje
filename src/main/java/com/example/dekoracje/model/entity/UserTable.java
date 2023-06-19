@@ -36,7 +36,6 @@ public class UserTable implements UserDetails {
     private UserRole userRole;
 
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(userRole.name()));

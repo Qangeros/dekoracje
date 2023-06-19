@@ -32,7 +32,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Supplier saveSupplier(Supplier supplier) { // TODO walidacja nipu
+    public Supplier saveSupplier(Supplier supplier) {
         return supplierRepository.save(supplier);
     }
 

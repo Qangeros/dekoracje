@@ -24,9 +24,11 @@ public class AuthenticationService {
         UserRole userRole;
         if (role == 0) {
             userRole = UserRole.CUSTOMER;
-        } else if (role == 1) {
+        }
+        else if (role == 1) {
             userRole = UserRole.SUPPLIER;
-        } else {
+        }
+        else {
             throw new IllegalStateException("Role not found");
         }
         var user = UserTable.builder()

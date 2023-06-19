@@ -3,8 +3,6 @@ package com.example.dekoracje.service;
 import com.example.dekoracje.model.entity.UserTable;
 import com.example.dekoracje.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service

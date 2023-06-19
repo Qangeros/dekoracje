@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     public Product saveProduct(Product product) {
         if (product.getName().length() > 50)
             throw new IllegalArgumentException("Nazwa produktu nie może być dłuższa niż 50 znaków");
-        return productRepository.save(product); // TODO: po dataValidatorService powinno być
+        return productRepository.save(product);
     }
 
     @Override

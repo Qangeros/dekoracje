@@ -1,5 +1,8 @@
 package com.example.dekoracje.service;
 
+import com.example.dekoracje.authentication.AuthenticationResponse;
+import com.example.dekoracje.authentication.AuthenticationService;
+import com.example.dekoracje.authentication.RegisterRequest;
 import com.example.dekoracje.model.entity.*;
 import com.example.dekoracje.repository.*;
 import jakarta.annotation.PostConstruct;
@@ -24,6 +27,8 @@ public class InitServiceImpl implements InitService {
     StockRepository str;
     @Autowired
     CustomerRepository cr;
+    @Autowired
+    AuthenticationService as;
 
     @PostConstruct
     public void init() {
@@ -32,12 +37,23 @@ public class InitServiceImpl implements InitService {
         System.out.println("-----------");
         System.out.println();
 
-        initUsers();
-        initAddress();
-        initSupplier();
-        initProduct();
-        initStock();
-        initCustomer();
+//        initUsers();
+//        initAddress();
+//        initSupplier();
+//        initProduct();
+//        initStock();
+//        initCustomer();
+        //initAdminAccount();
+    }
+
+    public void initAdminAccount() {
+        RegisterRequest request = new RegisterRequest();
+        request.setUsername("Admin");
+        request.setPassword("Admin");
+        request.setEmail("admin@admin.pl");
+        request.setRole(21376669);
+        as.register(request);
+        System.out.println("Konto admina utworzone chyba lol");
     }
 
     @Override

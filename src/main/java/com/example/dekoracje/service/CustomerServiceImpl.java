@@ -3,6 +3,7 @@ package com.example.dekoracje.service;
 import com.example.dekoracje.model.entity.Customer;
 import com.example.dekoracje.repository.AddressRepository;
 import com.example.dekoracje.repository.CustomerRepository;
+import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,12 +42,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        if(!dataValidatorService.isEmailValid(customer.getEmail()))
+        if (!dataValidatorService.isEmailValid(customer.getEmail())) {
             throw new IllegalArgumentException("Niepoprawny adres email");
-        if(!dataValidatorService.isPhoneValid(customer.getPhone()))
+        }
+        if (!dataValidatorService.isPhoneValid(customer.getPhone())) {
             throw new IllegalArgumentException("Niepoprawny numer telefonu");
+        }
         return customerRepository.save(customer);
-    } // TODO: walidacja nipu, sprawdzenie tych dwóch metod
+    }
 
     @Override
     public void deleteCustomerById(Long id) {
