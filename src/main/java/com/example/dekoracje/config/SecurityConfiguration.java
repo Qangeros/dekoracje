@@ -24,14 +24,19 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/stock/**", "/supplier/**", "/customer/**", "/address/**")
+//                                .hasRole(UserRole.ADMIN.name())
+//
+//                        .requestMatchers("/auth/**", "/contact/**", "/about/**", "/error/**", "/index/**",
+//                                "/login/**", "/registration/**", "/images/**", "/scripts/**")
+//                                .permitAll()
+//                )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/stock/**", "/supplier/**", "/customer/**", "/address/**")
-                                .hasRole(UserRole.ADMIN.name())
-
-                        .requestMatchers("/auth/**", "/contact/**", "/about/**", "/error/**", "/index/**",
-                                "/login/**", "/registration/**", "/images/**", "/scripts/**")
+                        .requestMatchers("/**")
                                 .permitAll()
                 )
+
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
