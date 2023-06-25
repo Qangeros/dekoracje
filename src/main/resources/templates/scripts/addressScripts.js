@@ -73,6 +73,9 @@ function deleteAddress(event, id) {
             url: '/address/deletebyid',
             type: 'DELETE',
             data: {id: id},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function () {
                 showAllAddresses(event);
                 $("#address-result").html("Usunięto adres").fadeIn().delay(3000).fadeOut();
